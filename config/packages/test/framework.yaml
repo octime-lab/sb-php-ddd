@@ -2,3 +2,10 @@ framework:
     test: true
     session:
         storage_id: session.storage.mock_file
+
+    router:
+        strict_requirements: true
+
+    validation:
+    # As of Symfony 4.3 you can disable the NotCompromisedPassword Validator
+    # disable_not_compromised_password: true

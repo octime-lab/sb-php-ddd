@@ -1,0 +1,5 @@
+pomm:
+    configuration:
+        db:
+            dsn: "%env(DATABASE_URL)%"
+            pomm:default: true
