@@ -4,7 +4,7 @@ namespace App\Domain\Entity\Entity;
 
 interface DomainEntityInterface
 {
-    public function getId(): ?DomainEntityIdInterface;
+    public function getDomainIdValue(): ?string;
 
     public function toArray(): array;
 

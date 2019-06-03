@@ -2,14 +2,14 @@
 
 namespace App\Domain\Entity\Entity;
 
-class DomainEntityId implements DomainEntityIdInterface
+final class DomainId implements DomainIdInterface
 {
     /**
      * @var string
      */
     private $value;
 
-    public function __construct(string $value = null)
+    public function __construct(?string $value)
     {
         $this->value = $value;
     }

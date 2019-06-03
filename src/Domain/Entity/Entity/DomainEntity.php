@@ -5,35 +5,30 @@ namespace App\Domain\Entity\Entity;
 abstract class DomainEntity implements DomainEntityInterface
 {
     /**
-     * @var DomainEntityIdInterface|null
+     * @var DomainIdInterface|null
      */
-    protected $id;
+    protected $domainId;
 
-    public function __construct(int $id = null)
+    public function __construct(?string $domainId = null)
     {
-        $this->id = new DomainEntityId($id);
+        $this->domainId = new DomainId($domainId);
     }
 
-    public function getId(): ?DomainEntityIdInterface
+    public function getDomainIdValue(): ?string
     {
-        return $this->id;
-    }
-
-    public function getIdValue(): ?int
-    {
-        if (null === $this->id) {
+        if (null === $this->domainId) {
             return null;
         }
 
-        return $this->id->getValue();
+        return $this->domainId->getValue();
     }
 
     public function toArray(): array
     {
-        $objVars = get_object_vars($this);
-        $objVars['id'] = null !== $this->getId() ? $this->getId()->getValue() : null;
+        $objectVars = get_object_vars($this);
+        $objectVars['domain_id'] = $this->getDomainIdValue();
 
-        return $objVars;
+        return $objectVars;
     }
 
     public function getAttributes(): array
@@ -48,8 +43,8 @@ abstract class DomainEntity implements DomainEntityInterface
 
     public function equals(DomainEntityInterface $entity): bool
     {
-        if (null !== $entity->getId()->getValue() && null !== $this->getId()->getValue()) {
-            return $entity->getId()->getValue() === $this->getId()->getValue();
+        if (null !== $entity->getDomainIdValue() && null !== $this->getDomainIdValue()) {
+            return $entity->getDomainIdValue() === $this->getDomainIdValue();
         }
 
         return false;
@@ -57,6 +52,6 @@ abstract class DomainEntity implements DomainEntityInterface
 
     public function isNew(): bool
     {
-        return null === $this->getIdValue();
+        return null === $this->getDomainIdValue();
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Domain\Entity\Entity;
 
-interface DomainEntityIdInterface
+interface DomainIdInterface
 {
     public function getValue(): ?string;
+
+    public function resetId(): void;
 }
