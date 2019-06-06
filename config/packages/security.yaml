@@ -5,7 +5,7 @@ security:
 
     providers:
         app_user_provider:
-            id: App\Infrastructure\Service\Provider\UserProvider
+            id: App\Infrastructure\Provider\UserProvider
 
     firewalls:
         dev:

@@ -3,40 +3,57 @@ parameters:
 
 services:
     _defaults:
-        autowire: false
+        autowire: true
         autoconfigure: false
 
     App\Application\Controller\:
         resource: '../src/Application/Controller'
         tags: ['controller.service_arguments']
 
+    ################### COMMAND ###################
+    App\Infrastructure\Command\CommandBus:
+        arguments:
+            - '@service_container'
+
+    ################### DTO ###################
+    App\Infrastructure\DTO\MovieDTO:
+
     ################### LISTENER ###################
     App\Application\EventListener\ExceptionListener:
         arguments:
             - '@jms_serializer'
             - '@translator.default'
-            - '@App\Infrastructure\Service\Serializer\FormErrorsSerializer'
+            - '@App\Infrastructure\Serializer\FormErrorsSerializer'
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
     ################### MODEL ###################
+    App\Infrastructure\Model\Db\PublicSchema\MovieModel:
+        tags: [pomm.model]
+
     App\Infrastructure\Model\Db\PublicSchema\UserModel:
         tags: [pomm.model]
 
+    ################### PARAM CONVERTER ###################
+    App\Infrastructure\ParamConverter\MovieParamConverter:
+        arguments:
+            - '@App\Infrastructure\Repository\MovieRepository'
+        tags:
+            - { name: request.param_converter, converter: movie }
+
+    ################### PROVIDER ###################
+    App\Infrastructure\Provider\UserProvider:
+        arguments:
+            - '@App\Infrastructure\Repository\UserRepository'
+
     ################### REPOSITORY ###################
+    App\Infrastructure\Repository\MovieRepository:
+        arguments:
+            - '@App\Infrastructure\Model\Db\PublicSchema\MovieModel'
+
     App\Infrastructure\Repository\UserRepository:
         arguments:
             - '@App\Infrastructure\Model\Db\PublicSchema\UserModel'
 
-    ################### PROVIDER ###################
-    App\Infrastructure\Service\Provider\UserProvider:
-        arguments:
-            - '@App\Infrastructure\Repository\UserRepository'
-            -
-    ################### COMMAND ###################
-    App\Infrastructure\Command\Command\CommandBus:
-        arguments:
-            - '@service_container'
-
     ################### SERIALIZER ###################
-    App\Infrastructure\Service\Serializer\FormErrorsSerializer:
+    App\Infrastructure\Serializer\FormErrorsSerializer:

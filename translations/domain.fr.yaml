@@ -1,0 +1,2 @@
+movie:
+    not_exists: "Ce film n'existe pas"
