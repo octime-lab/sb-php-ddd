@@ -1,0 +1,4 @@
+services:
+    App\Infrastructure\Command\CommandBus:
+        arguments:
+            - '@service_container'

@@ -1,0 +1,7 @@
+services:
+    App\Infrastructure\Model\Db\PublicSchema\MovieModel:
+        tags: [pomm.model]
+
+    App\Infrastructure\Model\Db\PublicSchema\UserModel:
+        tags: [pomm.model]
+

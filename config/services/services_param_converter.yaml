@@ -1,0 +1,6 @@
+services:
+    App\Infrastructure\ParamConverter\MovieParamConverter:
+        arguments:
+            - '@App\Infrastructure\Repository\MovieRepository'
+        tags:
+            - { name: request.param_converter, converter: movie }

@@ -1,3 +1,11 @@
+imports:
+    - { resource: "services/services_command.yaml" }
+    - { resource: "services/services_dto.yaml" }
+    - { resource: "services/services_model.yaml" }
+    - { resource: "services/services_param_converter.yaml" }
+    - { resource: "services/services_repository.yaml" }
+    - { resource: "services/services_repository_in_memory.yaml" }
+
 parameters:
     locale: 'fr'
 
@@ -10,14 +18,6 @@ services:
         resource: '../src/Application/Controller'
         tags: ['controller.service_arguments']
 
-    ################### COMMAND ###################
-    App\Infrastructure\Command\CommandBus:
-        arguments:
-            - '@service_container'
-
-    ################### DTO ###################
-    App\Infrastructure\DTO\MovieDTO:
-
     ################### LISTENER ###################
     App\Application\EventListener\ExceptionListener:
         arguments:
@@ -27,33 +27,10 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
-    ################### MODEL ###################
-    App\Infrastructure\Model\Db\PublicSchema\MovieModel:
-        tags: [pomm.model]
-
-    App\Infrastructure\Model\Db\PublicSchema\UserModel:
-        tags: [pomm.model]
-
-    ################### PARAM CONVERTER ###################
-    App\Infrastructure\ParamConverter\MovieParamConverter:
-        arguments:
-            - '@App\Infrastructure\Repository\MovieRepository'
-        tags:
-            - { name: request.param_converter, converter: movie }
-
     ################### PROVIDER ###################
     App\Infrastructure\Provider\UserProvider:
         arguments:
             - '@App\Infrastructure\Repository\UserRepository'
-
-    ################### REPOSITORY ###################
-    App\Infrastructure\Repository\MovieRepository:
-        arguments:
-            - '@App\Infrastructure\Model\Db\PublicSchema\MovieModel'
-
-    App\Infrastructure\Repository\UserRepository:
-        arguments:
-            - '@App\Infrastructure\Model\Db\PublicSchema\UserModel'
 
     ################### SERIALIZER ###################
     App\Infrastructure\Serializer\FormErrorsSerializer:
