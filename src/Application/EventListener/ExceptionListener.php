@@ -3,8 +3,8 @@
 namespace App\Application\EventListener;
 
 use App\Infrastructure\Exception\NotValidFormException;
-use App\Infrastructure\Representation\Representation\VndErrorCollectionRepresentation;
-use App\Infrastructure\Representation\Representation\VndErrorValidationRepresentation;
+use App\Infrastructure\Representation\VndErrorCollectionRepresentation;
+use App\Infrastructure\Representation\VndErrorValidationRepresentation;
 use App\Infrastructure\Serializer\FormErrorsSerializer;
 use Hateoas\Representation\VndErrorRepresentation;
 use JMS\Serializer\SerializerInterface;

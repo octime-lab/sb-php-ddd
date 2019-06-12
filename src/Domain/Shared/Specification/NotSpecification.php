@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Specification;
+namespace App\Domain\Shared\Specification;
 
 use App\Domain\Entity\DomainEntity;
 

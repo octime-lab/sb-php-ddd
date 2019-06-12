@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Specification;
+namespace App\Domain\Shared\Specification;
 
-use App\Domain\Entity\DomainEntity;
+use App\Domain\Shared\Entity\DomainEntity;
 
 interface SpecificationInterface
 {

@@ -2,8 +2,9 @@
 
 namespace App\Infrastructure\DTO;
 
-use App\Domain\Entity\DomainEntityInterface;
-use App\Domain\Entity\Movie as DomainMovie;
+use App\Domain\BoundedContext\Movie\ValueObject\ExploitationVisa;
+use App\Domain\Shared\Entity\DomainEntityInterface;
+use App\Domain\BoundedContext\Movie\Entity\Movie as DomainMovie;
 use App\Infrastructure\Model\Db\PublicSchema\Movie as FlexibleMovie;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
@@ -29,7 +30,7 @@ final class MovieDTO implements DTOInterface
         $movieData = $fMovie->extract();
 
         $dMovie = new DomainMovie(
-            $movieData['exploitation_visa'],
+            new ExploitationVisa($movieData['exploitation_visa']),
             $movieData['title'],
             $movieData['year']
         );

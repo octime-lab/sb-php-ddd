@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Domain\Entity;
+namespace App\Domain\BoundedContext\Movie\Entity;
 
-use App\Domain\ValueObject\Movie\ExploitationVisa;
+use App\Domain\BoundedContext\Movie\ValueObject\ExploitationVisa;
+use App\Domain\Shared\Entity\DomainEntity;
 
 class Movie extends DomainEntity
 {
@@ -16,10 +17,9 @@ class Movie extends DomainEntity
      */
     private $year;
 
-    public function __construct(string $exploitationVisa, string $title, int $year)
+    public function __construct(ExploitationVisa $exploitationVisa, string $title, int $year)
     {
         parent::__construct(new ExploitationVisa($exploitationVisa));
-
 
         $this->title = $title;
         $this->year = $year;

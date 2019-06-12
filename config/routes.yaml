@@ -2,6 +2,16 @@ login_check:
     path: login_check
     methods: 'POST'
 
+movie_create:
+    path:     api/movie/create
+    defaults: { _controller: 'App\Application\Controller\MovieController::create' }
+    methods:  POST
+
+movie_list:
+    path:     api/movie/list
+    defaults: { _controller: 'App\Application\Controller\MovieController::list' }
+    methods:  GET
+
 movie_read:
     path:     api/movie/{id}
     defaults: { _controller: 'App\Application\Controller\MovieController::read' }

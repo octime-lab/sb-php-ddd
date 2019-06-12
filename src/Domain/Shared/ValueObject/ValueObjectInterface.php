@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\ValueObject;
+namespace App\Domain\Shared\ValueObject;
 
 interface ValueObjectInterface
 {

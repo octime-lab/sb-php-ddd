@@ -27,4 +27,15 @@ SQL;
 
         return $this->query($sql);
     }
+
+    public function list(int $page, int $limit): CollectionIterator
+    {
+        $sql = <<<SQL
+            SELECT *
+            FROM movie
+            LIMIT $limit OFFSET ($page - 1) * $limit
+SQL;
+
+        return $this->query($sql);
+    }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\ParamConverter;
 
-use App\Domain\Entity\Movie;
-use App\Domain\Repository\MovieRepositoryInterface;
+use App\Domain\BoundedContext\Movie\Entity\Movie;
+use App\Domain\BoundedContext\Movie\Repository\MovieRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;

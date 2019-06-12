@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\DTO;
 
-use App\Domain\Entity\DomainEntityInterface;
+use App\Domain\Shared\Entity\DomainEntityInterface;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
 interface DTOInterface

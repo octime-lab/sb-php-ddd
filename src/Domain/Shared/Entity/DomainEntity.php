@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Entity;
+namespace App\Domain\Shared\Entity;
 
 abstract class DomainEntity implements DomainEntityInterface
 {

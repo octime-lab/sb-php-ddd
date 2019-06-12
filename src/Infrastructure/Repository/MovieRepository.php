@@ -2,8 +2,9 @@
 
 namespace App\Infrastructure\Repository;
 
-use App\Domain\Entity\Movie;
-use App\Domain\Repository\MovieRepositoryInterface;
+use App\Domain\BoundedContext\Movie\Collection\MovieCollection;
+use App\Domain\BoundedContext\Movie\Entity\Movie;
+use App\Domain\BoundedContext\Movie\Repository\MovieRepositoryInterface;
 use App\Infrastructure\DTO\MovieDTO;
 use App\Infrastructure\Model\Db\PublicSchema\MovieModel;
 
@@ -25,6 +26,11 @@ final class MovieRepository implements MovieRepositoryInterface
         $this->movieDTO = $movieDTO;
     }
 
+    public function save(Movie $dMovie): void
+    {
+        $this->movieModel->insertOne($this->movieDTO->domainToFlexible($dMovie));
+    }
+
     public function findByExploitationVisa(string $exploitationVisa): Movie
     {
         $fMovie = $this->movieModel->findByExploitationVisa($exploitationVisa)->current();
@@ -34,5 +40,16 @@ final class MovieRepository implements MovieRepositoryInterface
         }
 
         return $this->movieDTO->flexibleToDomain($fMovie);
+    }
+
+    public function findAll(int $page, int $limit): MovieCollection
+    {
+        $movieCollection = new MovieCollection();
+
+        foreach ($this->movieModel->list($page, $limit) as $fTask) {
+            $movieCollection->append($this->movieDTO->flexibleToDomain($fTask));
+        }
+
+        return $movieCollection;
     }
 }

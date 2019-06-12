@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Specification;
+namespace App\Domain\Shared\Specification;
 
 use App\Domain\Entity\DomainEntity;
 
-class AndSpecification extends Specification
+class OrSpecification extends Specification
 {
     /**
      * @var SpecificationInterface
@@ -24,6 +24,6 @@ class AndSpecification extends Specification
 
     public function isSatisfiedBy(DomainEntity $entity): bool
     {
-        return $this->specification1->isSatisfiedBy($entity) && $this->specification2->isSatisfiedBy($entity);
+        return $this->specification1->isSatisfiedBy($entity) || $this->specification2->isSatisfiedBy($entity);
     }
 }

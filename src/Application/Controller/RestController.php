@@ -2,7 +2,7 @@
 
 namespace App\Application\Controller;
 
-use App\Infrastructure\Command\CommandBus;
+use App\Application\Command\CommandBus;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 

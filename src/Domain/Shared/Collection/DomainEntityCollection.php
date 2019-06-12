@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Collection;
+namespace App\Domain\Shared\Collection;
 
 use App\Domain\Entity\DomainEntityInterface;
 use ArrayObject;
