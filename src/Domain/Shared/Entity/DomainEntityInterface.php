@@ -8,8 +8,6 @@ interface DomainEntityInterface
 
     public function getDomainIdValue(): string;
 
-    public function toArray(): array;
-
     public function getAttributes(): array;
 
     public function duplicate(): self;

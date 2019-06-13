@@ -24,14 +24,6 @@ abstract class DomainEntity implements DomainEntityInterface
         return $this->domainId->getId();
     }
 
-    public function toArray(): array
-    {
-        $objectVars = get_object_vars($this);
-        $objectVars['domain_id'] = $this->getDomainIdValue();
-
-        return $objectVars;
-    }
-
     public function getAttributes(): array
     {
         return array_keys(get_object_vars($this));

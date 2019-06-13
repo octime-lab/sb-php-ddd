@@ -2,13 +2,15 @@
 
 namespace App\Application\Controller;
 
-use App\Application\Form\Command\Movie\MovieCreateCommand;
-use App\Application\Type\CommandType;
+use App\Application\Command\Movie\MovieCreateCommand;
+use App\Application\Command\CommandType;
+use App\Application\Command\Movie\MovieDeleteCommand;
 use App\Domain\BoundedContext\Movie\Entity\Movie;
 use App\Application\Command\CommandBus;
 use App\Infrastructure\Exception\NotValidFormException;
 use App\Infrastructure\Repository\MovieRepository;
 use App\Infrastructure\Representation\MovieRepresentation;
+use App\Infrastructure\Utils\StringUtils;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\CollectionRepresentation;
 use Hateoas\Representation\Factory\PagerfantaFactory;
@@ -42,33 +44,70 @@ class MovieController extends RestController
     /**
      * @SWG\Post(
      *     @SWG\Parameter(
-     *         name="body",
+     *         name="movie",
      *         in="body",
+     *         description="Movie to create",
+     *         required=true,
      *         @SWG\Schema(ref=@Model(type=App\Application\Command\Movie\MovieCreateCommand::class))
      *     ),
      *     @SWG\Response(
      *         response="201",
      *         description="Movie created"
      *     ),
-     *     consumes={"application/json"},
-     *     produces={"application/json"},
-     *     summary="Create a movie with exploitation visa, title and year",
+     *     @SWG\Response(
+     *         response="default",
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref=@Model(type=App\Application\Command\Error::class))
+     *     ),
+     *     summary="Creates a new movie in the dabase.  Duplicates are allowed",
      *     tags={"Movie"}
      * )
      */
     public function create(Request $request): JsonResponse
     {
         $command = new MovieCreateCommand();
-        var_dump($request->attributes->all());
-        die;
+
         $form = $this->createForm(CommandType::class, $command, ['data_class' => MovieCreateCommand::class]);
-        $form->submit($request->request->all(), false);
+        $form->submit(StringUtils::camelizeArray(json_decode($request->getContent(), true)));
 
         if (!$form->isValid()) {
             throw new NotValidFormException($form);
         }
 
-        return new JsonResponse($this->commandBus->handle($command), JsonResponse::HTTP_CREATED, [], true);
+        return new JsonResponse($this->commandBus->handle($command), JsonResponse::HTTP_CREATED);
+    }
+
+    /**
+     * @SWG\Delete(
+     *     @SWG\Parameter(
+     *         description="ID of movie to delete",
+     *         format="int32",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=204,
+     *         description="Movie deleted"
+     *     ),
+     *     @SWG\Response(
+     *         response="default",
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref=@Model(type=App\Application\Command\Error::class))
+     *     ),
+     *     summary="Deletes a single movie based on the ID supplied",
+     *     tags={"Movie"}
+     * )
+     *
+     * @ParamConverter("movie", converter="movie")
+     */
+    public function delete(Movie $movie): JsonResponse
+    {
+        $command = new MovieDeleteCommand();
+        $command->exploitationVisa = $movie->getExploitationVisa();
+
+        return new JsonResponse($this->commandBus->handle($command), JsonResponse::HTTP_NO_CONTENT);
     }
 
     /**
@@ -83,19 +122,20 @@ class MovieController extends RestController
      *         name="limit",
      *         in="query",
      *         type="integer",
-     *         description="The limit of movies by pages"
+     *         description="Maximum number of results to return"
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="Returns the list of the movies",
+     *         description="List of the movies",
      *     ),
-     *     summary="List of the movies",
+     *     @SWG\Response(
+     *         response="default",
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref=@Model(type=App\Application\Command\Error::class))
+     *     ),
+     *     summary="Returns all movies from the system that the user has access to",
      *     tags={"Movie"}
      * )
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
     public function list(Request $request): JsonResponse
     {
@@ -104,7 +144,7 @@ class MovieController extends RestController
 
         $movieRepresentations = [];
 
-        foreach ($this->movieRepository->findAll($page, $limit) as $dMovie) {
+        foreach ($this->movieRepository->list($page, $limit) as $dMovie) {
             $movieRepresentations[] = new MovieRepresentation($dMovie);
         }
 
@@ -134,19 +174,28 @@ class MovieController extends RestController
 
     /**
      * @SWG\Get(
+     *     @SWG\Parameter(
+     *         description="ID of movie to fetch",
+     *         format="int32",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="Returns the list of the movies",
+     *         description="Movie response",
      *     ),
-     *     summary="Read a movie from exploitation visa",
+     *     @SWG\Response(
+     *         response="default",
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref=@Model(type=App\Application\Command\Error::class))
+     *     ),
+     *     summary="Returns a user based on a single ID, if the user does not have access to the movie",
      *     tags={"Movie"}
      * )
      *
      * @ParamConverter("movie", converter="movie")
-     *
-     * @param Movie $movie
-     *
-     * @return JsonResponse
      */
     public function read(Movie $movie): JsonResponse
     {

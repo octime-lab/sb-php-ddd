@@ -7,9 +7,11 @@ use App\Domain\BoundedContext\Movie\Entity\Movie;
 
 interface MovieRepositoryInterface
 {
-    public function findByExploitationVisa(string $exploitationVisa): Movie;
+    public function findByExploitationVisa(string $exploitationVisa): ?Movie;
 
-    public function findAll(int $page, int $limit): MovieCollection;
+    public function list(int $page, int $limit): MovieCollection;
 
     public function save(Movie $movie): void;
+
+    public function deleteByExploitationVisa(string $exploitationVisa): void;
 }

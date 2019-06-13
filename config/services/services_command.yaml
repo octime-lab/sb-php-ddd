@@ -7,3 +7,8 @@ services:
         public: true
         arguments:
             - '@App\Infrastructure\Repository\MovieRepository'
+
+    App\Application\Command\Movie\MovieDeleteCommandHandler:
+        public: true
+        arguments:
+            - '@App\Infrastructure\Repository\MovieRepository'

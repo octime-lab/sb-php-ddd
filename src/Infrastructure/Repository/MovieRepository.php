@@ -7,6 +7,7 @@ use App\Domain\BoundedContext\Movie\Entity\Movie;
 use App\Domain\BoundedContext\Movie\Repository\MovieRepositoryInterface;
 use App\Infrastructure\DTO\MovieDTO;
 use App\Infrastructure\Model\Db\PublicSchema\MovieModel;
+use PommProject\Foundation\Where;
 
 final class MovieRepository implements MovieRepositoryInterface
 {
@@ -28,10 +29,12 @@ final class MovieRepository implements MovieRepositoryInterface
 
     public function save(Movie $dMovie): void
     {
-        $this->movieModel->insertOne($this->movieDTO->domainToFlexible($dMovie));
+        $fMovie = $this->movieDTO->domainToFlexible($dMovie);
+
+        $this->movieModel->insertOne($fMovie);
     }
 
-    public function findByExploitationVisa(string $exploitationVisa): Movie
+    public function findByExploitationVisa(string $exploitationVisa): ?Movie
     {
         $fMovie = $this->movieModel->findByExploitationVisa($exploitationVisa)->current();
 
@@ -42,7 +45,7 @@ final class MovieRepository implements MovieRepositoryInterface
         return $this->movieDTO->flexibleToDomain($fMovie);
     }
 
-    public function findAll(int $page, int $limit): MovieCollection
+    public function list(int $page, int $limit): MovieCollection
     {
         $movieCollection = new MovieCollection();
 
@@ -51,5 +54,10 @@ final class MovieRepository implements MovieRepositoryInterface
         }
 
         return $movieCollection;
+    }
+
+    public function deleteByExploitationVisa(string $exploitationVisa): void
+    {
+        $this->movieModel->deleteWhere(new Where('exploitation_visa = $*', [$exploitationVisa]));
     }
 }

@@ -13,12 +13,11 @@ final class MovieDTO implements DTOInterface
     public function domainToFlexible(DomainEntityInterface $dMovie): FlexibleEntityInterface
     {
         $fMovie = new FlexibleMovie();
-        $tmpMovieData = $dMovie->toArray();
 
         $movieData = [];
-        $movieData['exploitation_visa'] = $tmpMovieData['exploitationVisa'];
-        $movieData['title'] = $tmpMovieData['title'];
-        $movieData['year'] = $tmpMovieData['title'];
+        $movieData['exploitation_visa'] = $dMovie->getExploitationVisa();
+        $movieData['title'] = $dMovie->getTitle();
+        $movieData['year'] = $dMovie->getYear();
 
         $fMovie->hydrate($movieData);
 

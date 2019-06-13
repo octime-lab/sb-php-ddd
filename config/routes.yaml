@@ -7,8 +7,15 @@ movie_create:
     defaults: { _controller: 'App\Application\Controller\MovieController::create' }
     methods:  POST
 
+movie_delete:
+    path:     api/movie/{id}
+    defaults: { _controller: 'App\Application\Controller\MovieController::delete' }
+    methods:  DELETE
+    requirements:
+        id: \d+
+
 movie_list:
-    path:     api/movie/list
+    path:     api/movies
     defaults: { _controller: 'App\Application\Controller\MovieController::list' }
     methods:  GET
 
