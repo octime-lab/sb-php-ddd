@@ -3,14 +3,14 @@
 namespace App\Application\Controller;
 
 use App\Application\Command\Movie\MovieCreateCommand;
-use App\Application\Command\CommandType;
 use App\Application\Command\Movie\MovieDeleteCommand;
-use App\Domain\BoundedContext\Movie\Entity\Movie;
-use App\Application\Command\CommandBus;
+use App\Domain\BoundedContext\Movie\Movie;
 use App\Infrastructure\Exception\NotValidFormException;
-use App\Infrastructure\Repository\MovieRepository;
+use App\Infrastructure\Repository\MovieRepositoryPomm;
 use App\Infrastructure\Representation\MovieRepresentation;
-use App\Infrastructure\Utils\StringUtils;
+use App\Infrastructure\Utils\Utils;
+use App\Infrastucture\Command\CommandBus;
+use App\Infrastucture\Command\CommandType;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\CollectionRepresentation;
 use Hateoas\Representation\Factory\PagerfantaFactory;
@@ -27,14 +27,14 @@ use Symfony\Component\HttpFoundation\Request;
 class MovieController extends RestController
 {
     /**
-     * @var MovieRepository
+     * @var MovieRepositoryPomm
      */
     private $movieRepository;
 
     public function __construct(
         SerializerInterface $serializer,
         CommandBus $commandBus,
-        MovieRepository $movieRepository
+        MovieRepositoryPomm $movieRepository
     ) {
         parent::__construct($serializer, $commandBus);
 
@@ -68,7 +68,7 @@ class MovieController extends RestController
         $command = new MovieCreateCommand();
 
         $form = $this->createForm(CommandType::class, $command, ['data_class' => MovieCreateCommand::class]);
-        $form->submit(StringUtils::camelizeArray(json_decode($request->getContent(), true)));
+        $form->submit(Utils::camelizeArray(json_decode($request->getContent(), true)));
 
         if (!$form->isValid()) {
             throw new NotValidFormException($form);
@@ -105,7 +105,7 @@ class MovieController extends RestController
     public function delete(Movie $movie): JsonResponse
     {
         $command = new MovieDeleteCommand();
-        $command->exploitationVisa = $movie->getExploitationVisa();
+        $command->exploitationVisa = $movie->exploitationVisa();
 
         return new JsonResponse($this->commandBus->handle($command), JsonResponse::HTTP_NO_CONTENT);
     }

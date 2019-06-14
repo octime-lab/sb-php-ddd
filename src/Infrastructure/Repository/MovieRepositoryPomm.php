@@ -9,16 +9,10 @@ use App\Infrastructure\DTO\MovieDTO;
 use App\Infrastructure\Model\Db\PublicSchema\MovieModel;
 use PommProject\Foundation\Where;
 
-final class MovieRepository implements MovieRepositoryInterface
+final class MovieRepositoryPomm implements MovieRepository
 {
-    /**
-     * @var MovieModel
-     */
     private $movieModel;
 
-    /**
-     * @var MovieDTO
-     */
     private $movieDTO;
 
     public function __construct(MovieModel $movieModel, MovieDTO $movieDTO)
@@ -27,7 +21,7 @@ final class MovieRepository implements MovieRepositoryInterface
         $this->movieDTO = $movieDTO;
     }
 
-    public function save(Movie $dMovie): void
+    public function create(Movie $dMovie): void
     {
         $fMovie = $this->movieDTO->domainToFlexible($dMovie);
 

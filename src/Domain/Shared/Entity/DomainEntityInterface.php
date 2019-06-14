@@ -4,11 +4,11 @@ namespace App\Domain\Shared\Entity;
 
 interface DomainEntityInterface
 {
-    public function getDomainId(): DomainIdInterface;
+    public function domainId(): DomainIdInterface;
 
-    public function getDomainIdValue(): string;
+    public function domainIdValue(): string;
 
-    public function getAttributes(): array;
+    public function attributes(): array;
 
     public function duplicate(): self;
 

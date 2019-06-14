@@ -14,17 +14,17 @@ abstract class DomainEntity implements DomainEntityInterface
         $this->domainId = $domainId;
     }
 
-    public function getDomainId(): DomainIdInterface
+    public function domainId(): DomainIdInterface
     {
         return $this->domainId;
     }
 
-    public function getDomainIdValue(): string
+    public function domainIdValue(): string
     {
         return $this->domainId->getId();
     }
 
-    public function getAttributes(): array
+    public function attributes(): array
     {
         return array_keys(get_object_vars($this));
     }

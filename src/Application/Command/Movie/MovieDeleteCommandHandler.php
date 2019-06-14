@@ -2,18 +2,15 @@
 
 namespace App\Application\Command\Movie;
 
-use App\Application\Command\Command;
-use App\Domain\BoundedContext\Movie\Repository\MovieRepositoryInterface;
-use App\Application\Command\CommandHandlerInterface;
+use App\Domain\BoundedContext\Movie\MovieRepository;
+use App\Infrastucture\Command\Command;
+use App\Infrastucture\Command\CommandHandlerInterface;
 
 final class MovieDeleteCommandHandler implements CommandHandlerInterface
 {
-    /**
-     * @var MovieRepositoryInterface
-     */
     private $movieRepository;
 
-    public function __construct(MovieRepositoryInterface $movieRepository)
+    public function __construct(MovieRepository $movieRepository)
     {
         $this->movieRepository = $movieRepository;
     }

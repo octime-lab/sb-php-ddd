@@ -1,14 +1,14 @@
 services:
-    App\Application\Command\CommandBus:
+    App\Infrastucture\Command\CommandBus:
         arguments:
             - '@service_container'
 
     App\Application\Command\Movie\MovieCreateCommandHandler:
         public: true
         arguments:
-            - '@App\Infrastructure\Repository\MovieRepository'
+            - '@App\Infrastructure\Repository\MovieRepositoryPomm'
 
     App\Application\Command\Movie\MovieDeleteCommandHandler:
         public: true
         arguments:
-            - '@App\Infrastructure\Repository\MovieRepository'
+            - '@App\Infrastructure\Repository\MovieRepositoryPomm'

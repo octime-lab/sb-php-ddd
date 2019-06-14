@@ -1,9 +1,9 @@
 services:
-    App\Infrastructure\Repository\MovieRepository:
+    App\Infrastructure\Repository\MovieRepositoryPomm:
         arguments:
             - '@App\Infrastructure\Model\Db\PublicSchema\MovieModel'
             - '@App\Infrastructure\DTO\MovieDTO'
 
-    App\Infrastructure\Repository\UserRepository:
+    App\Infrastructure\Repository\UserRepositoryPomm:
         arguments:
             - '@App\Infrastructure\Model\Db\PublicSchema\UserModel'

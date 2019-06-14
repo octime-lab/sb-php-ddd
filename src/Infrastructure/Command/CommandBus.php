@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Command;
+namespace App\Infrastucture\Command;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -30,7 +30,7 @@ final class CommandBus
         );
 
         $handlerClass =
-            'App\Application\Command\\'.
+            'App\Infrastucture\Command\\'.
             $this->getNameFolder($commandClassName).
             '\\'.
             $commandClassName.

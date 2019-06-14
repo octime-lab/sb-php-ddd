@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Domain\BoundedContext\Movie\Collection;
+namespace App\Domain\BoundedContext\Movie;
 
-use App\Domain\BoundedContext\Entity\Movie;
 use App\Domain\Shared\Collection\DomainEntityCollection;
 
-class MovieCollection extends DomainEntityCollection
+class Movies extends DomainEntityCollection
 {
     public function __construct()
     {

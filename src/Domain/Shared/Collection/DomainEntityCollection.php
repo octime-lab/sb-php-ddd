@@ -2,7 +2,7 @@
 
 namespace App\Domain\Shared\Collection;
 
-use App\Domain\Entity\DomainEntityInterface;
+use App\Domain\Shared\Entity\DomainEntityInterface;
 use ArrayObject;
 
 abstract class DomainEntityCollection extends ArrayObject

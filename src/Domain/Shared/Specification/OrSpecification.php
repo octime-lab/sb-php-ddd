@@ -2,7 +2,7 @@
 
 namespace App\Domain\Shared\Specification;
 
-use App\Domain\Entity\DomainEntity;
+use App\Domain\Shared\Entity\DomainEntity;
 
 class OrSpecification extends Specification
 {

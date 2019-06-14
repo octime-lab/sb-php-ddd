@@ -2,7 +2,7 @@
 
 namespace App\Application\Command\Movie;
 
-use App\Application\Command\Command;
+use App\Infrastucture\Command\Command;
 
 class MovieDeleteCommand extends Command
 {

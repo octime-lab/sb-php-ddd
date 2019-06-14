@@ -5,7 +5,7 @@ namespace App\Infrastructure\InMemory;
 use App\Domain\BoundedContext\Movie\Collection\MovieCollection;
 use App\Domain\BoundedContext\Movie\Entity\Movie;
 use App\Domain\BoundedContext\Movie\Repository\MovieRepositoryInterface;
-use App\Domain\BoundedContext\Movie\ValueObject\ExploitationVisa;
+use App\Domain\BoundedContext\Movie\ValueObject\MovieExploitationVisa;
 
 final class MovieInMemory implements MovieRepositoryInterface
 {
@@ -17,8 +17,8 @@ final class MovieInMemory implements MovieRepositoryInterface
     public function __construct()
     {
         $this->movies = new MovieCollection();
-        $this->movies->append(new Movie(new ExploitationVisa('134562'), 'Rambo: last blood', 2019));
-        $this->movies->append(new Movie(new ExploitationVisa('135624'), 'Avengers endgame', 2019));
+        $this->movies->append(new Movie(new MovieExploitationVisa('134562'), 'Rambo: last blood', 2019));
+        $this->movies->append(new Movie(new MovieExploitationVisa('135624'), 'Avengers endgame', 2019));
     }
 
     public function save(Movie $movie): void

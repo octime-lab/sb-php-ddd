@@ -5,7 +5,7 @@ namespace App\Infrastructure\Repository;
 use App\Infrastructure\Model\Db\PublicSchema\User;
 use App\Infrastructure\Model\Db\PublicSchema\UserModel;
 
-class UserRepository
+class UserRepositoryPomm
 {
     /**
      * @var UserModel
