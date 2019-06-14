@@ -4,9 +4,6 @@ namespace App\Domain\Shared\ValueObject;
 
 abstract class IntValueObject
 {
-    /**
-     * @var int
-     */
     protected $value;
 
     public function __construct(int $value)

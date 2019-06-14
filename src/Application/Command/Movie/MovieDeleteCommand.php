@@ -2,12 +2,9 @@
 
 namespace App\Application\Command\Movie;
 
-use App\Infrastucture\Command\Command;
+use App\Infrastructure\Command\Command;
 
 class MovieDeleteCommand extends Command
 {
-    /**
-     * @var string
-     */
     public $exploitationVisa;
 }

@@ -9,8 +9,8 @@ use App\Infrastructure\Exception\NotValidFormException;
 use App\Infrastructure\Repository\MovieRepositoryPomm;
 use App\Infrastructure\Representation\MovieRepresentation;
 use App\Infrastructure\Utils\Utils;
-use App\Infrastucture\Command\CommandBus;
-use App\Infrastucture\Command\CommandType;
+use App\Infrastructure\Command\CommandBus;
+use App\Infrastructure\Command\CommandType;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\CollectionRepresentation;
 use Hateoas\Representation\Factory\PagerfantaFactory;
@@ -57,9 +57,9 @@ class MovieController extends RestController
      *     @SWG\Response(
      *         response="default",
      *         description="Unexpected error",
-     *         @SWG\Schema(ref=@Model(type=App\Application\Command\Error::class))
+     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Command\Error::class))
      *     ),
-     *     summary="Creates a new movie in the dabase.  Duplicates are allowed",
+     *     summary="Creates a new movie in the dabase. Duplicates are allowed",
      *     tags={"Movie"}
      * )
      */
@@ -94,7 +94,7 @@ class MovieController extends RestController
      *     @SWG\Response(
      *         response="default",
      *         description="Unexpected error",
-     *         @SWG\Schema(ref=@Model(type=App\Application\Command\Error::class))
+     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Command\Error::class))
      *     ),
      *     summary="Deletes a single movie based on the ID supplied",
      *     tags={"Movie"}
@@ -131,7 +131,7 @@ class MovieController extends RestController
      *     @SWG\Response(
      *         response="default",
      *         description="Unexpected error",
-     *         @SWG\Schema(ref=@Model(type=App\Application\Command\Error::class))
+     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Command\Error::class))
      *     ),
      *     summary="Returns all movies from the system that the user has access to",
      *     tags={"Movie"}
@@ -189,7 +189,7 @@ class MovieController extends RestController
      *     @SWG\Response(
      *         response="default",
      *         description="Unexpected error",
-     *         @SWG\Schema(ref=@Model(type=App\Application\Command\Error::class))
+     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Command\Error::class))
      *     ),
      *     summary="Returns a user based on a single ID, if the user does not have access to the movie",
      *     tags={"Movie"}

@@ -6,9 +6,6 @@ use App\Domain\Shared\Entity\DomainEntity;
 
 class NotSpecification extends Specification
 {
-    /**
-     * @var SpecificationInterface
-     */
     private $specification;
 
     public function __construct(SpecificationInterface $specification)

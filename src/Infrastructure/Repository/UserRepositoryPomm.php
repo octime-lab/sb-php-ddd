@@ -7,9 +7,6 @@ use App\Infrastructure\Model\Db\PublicSchema\UserModel;
 
 class UserRepositoryPomm
 {
-    /**
-     * @var UserModel
-     */
     private $userModel;
 
     public function __construct(UserModel $userModel)

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastucture\Command;
+namespace App\Infrastructure\Command;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

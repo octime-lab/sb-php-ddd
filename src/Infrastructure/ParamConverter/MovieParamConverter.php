@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\ParamConverter;
 
-use App\Domain\BoundedContext\Movie\Entity\Movie;
-use App\Domain\BoundedContext\Movie\Repository\MovieRepositoryInterface;
+use App\Domain\BoundedContext\Movie\Movie;
+use App\Domain\BoundedContext\Movie\MovieRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,12 +11,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class MovieParamConverter implements ParamConverterInterface
 {
-    /**
-     * @var MovieRepositoryInterface
-     */
     private $movieRepository;
 
-    public function __construct(MovieRepositoryInterface $movieRepository)
+    public function __construct(MovieRepository $movieRepository)
     {
         $this->movieRepository = $movieRepository;
     }

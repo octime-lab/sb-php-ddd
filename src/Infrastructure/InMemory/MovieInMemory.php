@@ -2,52 +2,29 @@
 
 namespace App\Infrastructure\InMemory;
 
-use App\Domain\BoundedContext\Movie\Collection\MovieCollection;
-use App\Domain\BoundedContext\Movie\Entity\Movie;
-use App\Domain\BoundedContext\Movie\Repository\MovieRepositoryInterface;
-use App\Domain\BoundedContext\Movie\ValueObject\MovieExploitationVisa;
+use App\Domain\BoundedContext\Movie\Movie;
+use App\Domain\BoundedContext\Movie\MovieRepository;
+use App\Domain\BoundedContext\Movie\Movies;
 
-final class MovieInMemory implements MovieRepositoryInterface
+final class MovieInMemory implements MovieRepository
 {
-    /**
-     * @var MovieCollection
-     */
-    private $movies;
-
-    public function __construct()
+    public function findByExploitationVisa(string $exploitationVisa): ?Movie
     {
-        $this->movies = new MovieCollection();
-        $this->movies->append(new Movie(new MovieExploitationVisa('134562'), 'Rambo: last blood', 2019));
-        $this->movies->append(new Movie(new MovieExploitationVisa('135624'), 'Avengers endgame', 2019));
+        // TODO: Implement findByExploitationVisa() method.
     }
 
-    public function save(Movie $movie): void
+    public function create(Movie $movie): void
     {
-        $this->movies->append($movie);
+        // TODO: Implement create() method.
     }
 
     public function deleteByExploitationVisa(string $exploitationVisa): void
     {
-        foreach ($this->movies as $movie) {
-            if ($movie->getExploitationVisa === $exploitationVisa) {
-                $this->movies->remove($movie);
-            }
-        }
+        // TODO: Implement deleteByExploitationVisa() method.
     }
 
-    public function findByExploitationVisa(string $exploitationVisa): ?Movie
+    public function list(int $page, int $limit): Movies
     {
-        foreach ($this->movies as $movie) {
-            if ($movie->getExploitationVisa === $exploitationVisa) {
-                return $movie;
-            }
-        }
-
-        return null;
-    }
-
-    public function list(int $page, $limit): MovieCollection
-    {
-        return $this->movies;
+        // TODO: Implement list() method.
     }
 }

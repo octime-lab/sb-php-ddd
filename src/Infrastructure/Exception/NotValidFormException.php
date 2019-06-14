@@ -6,9 +6,6 @@ use Symfony\Component\Form\FormInterface;
 
 class NotValidFormException extends \Exception
 {
-    /**
-     * @var FormInterface
-     */
     private $form;
 
     public function __construct(FormInterface $form)

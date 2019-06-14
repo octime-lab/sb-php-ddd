@@ -7,9 +7,6 @@ use ReflectionClass;
 
 abstract class Enum
 {
-    /**
-     * @var array
-     */
     protected static $cache = [];
 
     protected $value;
@@ -38,7 +35,7 @@ abstract class Enum
         $class = static::class;
 
         if (!isset(self::$cache[$class])) {
-            $reflected           = new ReflectionClass($class);
+            $reflected = new ReflectionClass($class);
             self::$cache[$class] = Utils::reindex(self::keysFormatter(), $reflected->getConstants());
         }
 

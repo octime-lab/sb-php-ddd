@@ -2,9 +2,9 @@
 
 namespace App\Infrastructure\Repository;
 
-use App\Domain\BoundedContext\Movie\Collection\MovieCollection;
-use App\Domain\BoundedContext\Movie\Entity\Movie;
-use App\Domain\BoundedContext\Movie\Repository\MovieRepositoryInterface;
+use App\Domain\BoundedContext\Movie\MovieRepository;
+use App\Domain\BoundedContext\Movie\Movies;
+use App\Domain\BoundedContext\Movie\Movie;
 use App\Infrastructure\DTO\MovieDTO;
 use App\Infrastructure\Model\Db\PublicSchema\MovieModel;
 use PommProject\Foundation\Where;
@@ -39,15 +39,15 @@ final class MovieRepositoryPomm implements MovieRepository
         return $this->movieDTO->flexibleToDomain($fMovie);
     }
 
-    public function list(int $page, int $limit): MovieCollection
+    public function list(int $page, int $limit): Movies
     {
-        $movieCollection = new MovieCollection();
+        $movies = new Movies();
 
         foreach ($this->movieModel->list($page, $limit) as $fTask) {
-            $movieCollection->append($this->movieDTO->flexibleToDomain($fTask));
+            $movies->append($this->movieDTO->flexibleToDomain($fTask));
         }
 
-        return $movieCollection;
+        return $movies;
     }
 
     public function deleteByExploitationVisa(string $exploitationVisa): void

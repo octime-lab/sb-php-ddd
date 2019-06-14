@@ -4,9 +4,6 @@ namespace App\Domain\Shared\Entity;
 
 abstract class DomainEntity implements DomainEntityInterface
 {
-    /**
-     * @var DomainIdInterface|null
-     */
     protected $domainId;
 
     public function __construct(DomainIdInterface $domainId)
@@ -21,7 +18,7 @@ abstract class DomainEntity implements DomainEntityInterface
 
     public function domainIdValue(): string
     {
-        return $this->domainId->getId();
+        return $this->domainId->id();
     }
 
     public function attributes(): array
@@ -36,8 +33,8 @@ abstract class DomainEntity implements DomainEntityInterface
 
     public function equals(DomainEntityInterface $entity): bool
     {
-        if (null !== $entity->getDomainIdValue() && null !== $this->getDomainIdValue()) {
-            return $entity->getDomainIdValue() === $this->getDomainIdValue();
+        if (null !== $entity->domainIdValue() && null !== $this->domainIdValue()) {
+            return $entity->domainIdValue() === $this->domainIdValue();
         }
 
         return false;
@@ -45,6 +42,6 @@ abstract class DomainEntity implements DomainEntityInterface
 
     public function isNew(): bool
     {
-        return null === $this->getDomainIdValue();
+        return null === $this->domainIdValue();
     }
 }

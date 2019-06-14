@@ -3,19 +3,16 @@
 namespace App\Infrastructure\Provider;
 
 use App\Infrastructure\Model\Db\PublicSchema\User;
-use App\Infrastructure\Repository\UserRepository;
+use App\Infrastructure\Repository\UserRepositoryPomm;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 final class UserProvider implements UserProviderInterface
 {
-    /**
-     * @var UserRepository
-     */
     private $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepositoryPomm $userRepository)
     {
         $this->userRepository = $userRepository;
     }

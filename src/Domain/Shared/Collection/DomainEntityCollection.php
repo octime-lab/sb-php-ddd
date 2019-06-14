@@ -7,9 +7,6 @@ use ArrayObject;
 
 abstract class DomainEntityCollection extends ArrayObject
 {
-    /**
-     * @var string
-     */
     protected $entityClass;
 
     public function __construct(string $entityClass)
@@ -17,11 +14,6 @@ abstract class DomainEntityCollection extends ArrayObject
         $this->entityClass = $entityClass;
 
         parent::__construct();
-    }
-
-    public function getEntityClass(): string
-    {
-        return $this->entityClass;
     }
 
     public function exists(DomainEntityInterface $entity): bool

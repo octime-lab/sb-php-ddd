@@ -30,7 +30,7 @@ services:
     ################### PROVIDER ###################
     App\Infrastructure\Provider\UserProvider:
         arguments:
-            - '@App\Infrastructure\Repository\UserRepository'
+            - '@App\Infrastructure\Repository\UserRepositoryPomm'
 
     ################### SERIALIZER ###################
     App\Infrastructure\Serializer\FormErrorsSerializer:

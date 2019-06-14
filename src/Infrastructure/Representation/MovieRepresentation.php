@@ -2,14 +2,12 @@
 
 namespace App\Infrastructure\Representation;
 
-use App\Domain\BoundedContext\Movie\Entity\Movie;
+use App\Domain\BoundedContext\Movie\Movie;
 use JMS\Serializer\Annotation as Serializer;
 
 class MovieRepresentation
 {
     /**
-     * @var string
-     *
      * @Serializer\Groups({
      *     "movie_read",
      *     "movie_list"
@@ -18,8 +16,6 @@ class MovieRepresentation
     private $exploitationVisa;
 
     /**
-     * @var string
-     *
      * @Serializer\Groups({
      *     "movie_read",
      *     "movie_list"
@@ -28,8 +24,6 @@ class MovieRepresentation
     private $title;
 
     /**
-     * @var int
-     *
      * @Serializer\Groups({
      *     "movie_read",
      *     "movie_list"
@@ -39,8 +33,8 @@ class MovieRepresentation
 
     public function __construct(Movie $dMovie)
     {
-        $this->exploitationVisa = $dMovie->getExploitationVisa();
-        $this->title = $dMovie->getTitle();
-        $this->year = $dMovie->getYear();
+        $this->exploitationVisa = $dMovie->exploitationVisa();
+        $this->title = $dMovie->title();
+        $this->year = $dMovie->year();
     }
 }

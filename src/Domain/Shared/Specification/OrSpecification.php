@@ -6,14 +6,8 @@ use App\Domain\Shared\Entity\DomainEntity;
 
 class OrSpecification extends Specification
 {
-    /**
-     * @var SpecificationInterface
-     */
     private $specification1;
 
-    /**
-     * @var SpecificationInterface
-     */
     private $specification2;
 
     public function __construct(SpecificationInterface $specification1, SpecificationInterface $specification2)

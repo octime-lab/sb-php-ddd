@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastucture\Command;
+namespace App\Infrastructure\Command;
 
 use Swagger\Annotations as SWG;
 
@@ -10,8 +10,6 @@ use Swagger\Annotations as SWG;
 class Error extends \Exception
 {
     /**
-     * @var string
-     *
      * @SWG\Property(type="string")
      */
     public $message;

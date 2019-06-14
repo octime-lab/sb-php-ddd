@@ -3,8 +3,8 @@
 namespace App\Application\Command\Movie;
 
 use App\Domain\BoundedContext\Movie\MovieRepository;
-use App\Infrastucture\Command\Command;
-use App\Infrastucture\Command\CommandHandlerInterface;
+use App\Infrastructure\Command\Command;
+use App\Infrastructure\Command\CommandHandlerInterface;
 
 final class MovieDeleteCommandHandler implements CommandHandlerInterface
 {
@@ -17,6 +17,6 @@ final class MovieDeleteCommandHandler implements CommandHandlerInterface
 
     public function handle(Command $command): void
     {
-        $this->movieRepository->deleteById($command->exploitationVisa);
+        $this->movieRepository->deleteByExploitationVisa($command->exploitationVisa);
     }
 }
