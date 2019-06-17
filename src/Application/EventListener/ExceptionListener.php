@@ -16,19 +16,10 @@ use Symfony\Component\Translation\Translator;
 
 final class ExceptionListener
 {
-    /**
-     * @var SerializerInterface
-     */
     private $serializer;
 
-    /**
-     * @var Translator
-     */
     private $translator;
 
-    /**
-     * @var FormErrorsSerializer
-     */
     private $formErrorsSerializer;
 
     public function __construct(

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domain\Shared\Collection;
+namespace App\Domain\Shared;
 
 use App\Domain\Shared\Entity\DomainEntityInterface;
 use ArrayObject;
 
-abstract class DomainEntityCollection extends ArrayObject
+abstract class Collection extends ArrayObject
 {
     protected $entityClass;
 

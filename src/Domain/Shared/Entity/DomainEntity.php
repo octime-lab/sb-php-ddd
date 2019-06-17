@@ -2,23 +2,39 @@
 
 namespace App\Domain\Shared\Entity;
 
+use App\Domain\Shared\ValueObject\Uuid;
+
 abstract class DomainEntity implements DomainEntityInterface
 {
-    protected $domainId;
+    protected $id;
 
-    public function __construct(DomainIdInterface $domainId)
+    private $domainEvents = [];
+
+    public function __construct(?Uuid $id)
     {
-        $this->domainId = $domainId;
+        $this->id = $id;
     }
 
-    public function domainId(): DomainIdInterface
+    public function id(): ?string
     {
-        return $this->domainId;
+        if (null === $this->id) {
+            return null;
+        }
+
+        return $this->id->value();
     }
 
-    public function domainIdValue(): string
+    final public function pullDomainEvents(): array
     {
-        return $this->domainId->id();
+        $domainEvents       = $this->domainEvents;
+        $this->domainEvents = [];
+
+        return $domainEvents;
+    }
+
+    final protected function record(DomainEvent $domainEvent): void
+    {
+        $this->domainEvents[] = $domainEvent;
     }
 
     public function attributes(): array
@@ -26,15 +42,10 @@ abstract class DomainEntity implements DomainEntityInterface
         return array_keys(get_object_vars($this));
     }
 
-    public function duplicate(): DomainEntityInterface
-    {
-        return clone $this;
-    }
-
     public function equals(DomainEntityInterface $entity): bool
     {
-        if (null !== $entity->domainIdValue() && null !== $this->domainIdValue()) {
-            return $entity->domainIdValue() === $this->domainIdValue();
+        if (null !== $entity->id() && null !== $this->id()) {
+            return $entity->id() === $this->id();
         }
 
         return false;
@@ -42,6 +53,6 @@ abstract class DomainEntity implements DomainEntityInterface
 
     public function isNew(): bool
     {
-        return null === $this->domainIdValue();
+        return null === $this->id();
     }
 }

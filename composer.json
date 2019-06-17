@@ -8,6 +8,7 @@
         "nelmio/api-doc-bundle": "^3.4",
         "nelmio/cors-bundle": "^1.5",
         "pomm-project/pomm-bundle": "^2.4",
+        "ramsey/uuid": "^3.8",
         "sensio/framework-extra-bundle": "^5.3",
         "symfony/console": "4.3.*",
         "symfony/form": "4.3.*",

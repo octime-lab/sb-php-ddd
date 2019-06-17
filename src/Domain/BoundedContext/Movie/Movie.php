@@ -4,23 +4,26 @@ namespace App\Domain\BoundedContext\Movie;
 
 use App\Domain\Shared\Entity\DomainEntity;
 
-class Movie extends DomainEntity
+final class Movie extends DomainEntity
 {
+    private $exploitationVisa;
+
     private $title;
 
     private $year;
 
-    public function __construct(MovieExploitationVisa $exploitationVisa, MovieTitle $title, MovieYear $year)
+    public function __construct(MovieId $id, MovieExploitationVisa $exploitationVisa, MovieTitle $title, MovieYear $year)
     {
-        parent::__construct($exploitationVisa);
+        parent::__construct($id);
 
+        $this->exploitationVisa = $exploitationVisa;
         $this->title = $title;
         $this->year = $year;
     }
 
     public function exploitationVisa(): string
     {
-        return $this->domainId->id();
+        return $this->exploitationVisa->value();
     }
 
     public function title(): string

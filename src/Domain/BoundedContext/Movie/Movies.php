@@ -2,9 +2,9 @@
 
 namespace App\Domain\BoundedContext\Movie;
 
-use App\Domain\Shared\Collection\DomainEntityCollection;
+use App\Domain\Shared\Collection;
 
-class Movies extends DomainEntityCollection
+class Movies extends Collection
 {
     public function __construct()
     {
