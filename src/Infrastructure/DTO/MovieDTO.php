@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\DTO;
 
+use App\Domain\BoundedContext\Movie\MovieExploitationVisa;
 use App\Domain\BoundedContext\Movie\MovieTitle;
 use App\Domain\BoundedContext\Movie\MovieYear;
 use App\Domain\Shared\Entity\DomainEntityInterface;

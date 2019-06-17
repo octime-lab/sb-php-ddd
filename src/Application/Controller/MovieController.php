@@ -26,9 +26,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MovieController extends RestController
 {
-    /**
-     * @var MovieRepositoryPomm
-     */
     private $movieRepository;
 
     public function __construct(
