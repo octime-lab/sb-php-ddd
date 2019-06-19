@@ -2,15 +2,17 @@
 
 namespace App\Application\EventListener;
 
+use App\Domain\Shared\DomainError;
 use App\Infrastructure\Exception\NotValidFormException;
 use App\Infrastructure\Representation\VndError\VndErrorCollectionRepresentation;
 use App\Infrastructure\Representation\VndError\VndErrorValidationRepresentation;
 use App\Infrastructure\Serializer\FormErrorsSerializer;
+use Exception;
 use Hateoas\Representation\VndErrorRepresentation;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Translation\Translator;
 
@@ -32,7 +34,7 @@ final class ExceptionListener
         $this->formErrorsSerializer = $formErrorsSerializer;
     }
 
-    public function onKernelException(GetResponseForExceptionEvent $event): void
+    public function onKernelException(ExceptionEvent $event): void
     {
         $exception = $event->getException();
 
@@ -43,12 +45,15 @@ final class ExceptionListener
             case $exception instanceof HttpException:
                 $this->handleHttpException($event, $exception);
                 break;
+            case $exception instanceof DomainError:
+                $this->handleDomainException($event, $exception);
+                break;
             default:
                 $this->handleException($event, $exception);
         }
     }
 
-    private function handleException(GetResponseForExceptionEvent $event, \Exception $exception): void
+    private function handleException(ExceptionEvent $event, Exception $exception): void
     {
         $event->setResponse(
             new Response(
@@ -65,7 +70,7 @@ final class ExceptionListener
         );
     }
 
-    private function handleHttpException(GetResponseForExceptionEvent $event, HttpException $exception): void
+    private function handleHttpException(ExceptionEvent $event, HttpException $exception): void
     {
         $event->setResponse(
             new JsonResponse(
@@ -82,8 +87,25 @@ final class ExceptionListener
         );
     }
 
+    private function handleDomainException(ExceptionEvent $event, DomainError $exception): void
+    {
+        $event->setResponse(
+            new JsonResponse(
+                $this->serializer->serialize(
+                    new VndErrorRepresentation(
+                        $this->translator->trans($exception->errorCode(),
+                    [],
+                    'domain'
+                )), 'json'),
+                $exception->getCode(),
+                [],
+                true
+            )
+        );
+    }
+
     private function handleNotValidFormException(
-        GetResponseForExceptionEvent $event,
+        ExceptionEvent $event,
         NotValidFormException $exception
     ): void {
         $formErrors = $this->formErrorsSerializer->serializeFormErrors($exception->getForm());

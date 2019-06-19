@@ -3,11 +3,12 @@
 namespace App\Infrastructure\ParamConverter;
 
 use App\Domain\BoundedContext\Movie\Movie;
+use App\Domain\BoundedContext\Movie\MovieFinder;
+use App\Domain\BoundedContext\Movie\MovieId;
 use App\Domain\BoundedContext\Movie\MovieRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class MovieParamConverter implements ParamConverterInterface
 {
@@ -20,9 +21,7 @@ final class MovieParamConverter implements ParamConverterInterface
 
     public function apply(Request $request, ParamConverter $configuration): bool
     {
-        if (null === $movie = $this->movieRepository->findById($request->attributes->get('id'))) {
-            throw new NotFoundHttpException('movie.not_exits');
-        }
+        $movie = (new MovieFinder($this->movieRepository))(new MovieId($request->attributes->get('id')));
 
         $request->attributes->set($configuration->getName(), $movie);
 

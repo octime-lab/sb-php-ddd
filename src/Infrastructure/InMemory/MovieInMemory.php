@@ -3,12 +3,13 @@
 namespace App\Infrastructure\InMemory;
 
 use App\Domain\BoundedContext\Movie\Movie;
+use App\Domain\BoundedContext\Movie\MovieId;
 use App\Domain\BoundedContext\Movie\MovieRepository;
 use App\Domain\BoundedContext\Movie\Movies;
 
 final class MovieInMemory implements MovieRepository
 {
-    public function deleteById(string $id): void
+    public function delete(MovieId $id): void
     {
         // TODO: Implement deleteById() method.
     }
@@ -18,7 +19,7 @@ final class MovieInMemory implements MovieRepository
         // TODO: Implement create() method.
     }
 
-    public function findById(string $id): ?Movie
+    public function search(MovieId $id): ?Movie
     {
         // TODO: Implement findById() method.
     }

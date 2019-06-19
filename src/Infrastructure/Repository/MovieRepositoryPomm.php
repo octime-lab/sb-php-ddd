@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Repository;
 
+use App\Domain\BoundedContext\Movie\MovieId;
 use App\Domain\BoundedContext\Movie\MovieRepository;
 use App\Domain\BoundedContext\Movie\Movies;
 use App\Domain\BoundedContext\Movie\Movie;
@@ -28,9 +29,9 @@ final class MovieRepositoryPomm implements MovieRepository
         $this->movieModel->insertOne($fMovie);
     }
 
-    public function findById(string $id): ?Movie
+    public function search(MovieId $id): ?Movie
     {
-        $fMovie = $this->movieModel->findById($id)->current();
+        $fMovie = $this->movieModel->findById($id->value())->current();
 
         if (!$fMovie) {
             return null;
@@ -50,8 +51,8 @@ final class MovieRepositoryPomm implements MovieRepository
         return $movies;
     }
 
-    public function deleteById(string $id): void
+    public function delete(MovieId $id): void
     {
-        $this->movieModel->deleteWhere(new Where('id = $*', [$id]));
+        $this->movieModel->deleteWhere(new Where('id = $*', [$id->value()]));
     }
 }

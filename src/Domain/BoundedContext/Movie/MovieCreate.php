@@ -4,7 +4,7 @@ namespace App\Domain\BoundedContext\Movie;
 
 use App\Domain\Shared\ValueObject\Uuid;
 
-class MovieCreate
+final class MovieCreate
 {
     public static function handle(string $exploitationVisa, string $title, int $year): Movie
     {

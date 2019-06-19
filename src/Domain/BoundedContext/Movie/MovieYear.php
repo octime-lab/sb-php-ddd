@@ -4,6 +4,6 @@ namespace App\Domain\BoundedContext\Movie;
 
 use App\Domain\Shared\ValueObject\IntValueObject;
 
-class MovieYear extends IntValueObject
+final class MovieYear extends IntValueObject
 {
 }

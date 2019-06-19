@@ -6,6 +6,8 @@ use DomainException;
 
 abstract class DomainError extends DomainException
 {
+    public const NOT_FOUND = 404;
+
     public function __construct()
     {
         parent::__construct($this->errorMessage());

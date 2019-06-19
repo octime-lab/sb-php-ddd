@@ -4,7 +4,7 @@ namespace App\Domain\BoundedContext\Movie;
 
 use App\Domain\Shared\Collection;
 
-class Movies extends Collection
+final class Movies extends Collection
 {
     public function __construct()
     {

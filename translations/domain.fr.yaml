@@ -1,2 +1,1 @@
-movie:
-    not_exists: "Ce film n'existe pas"
+movie_not_found: "Le film n'a pas pu être trouvé"
