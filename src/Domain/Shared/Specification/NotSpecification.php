@@ -2,7 +2,7 @@
 
 namespace App\Domain\Shared\Specification;
 
-use App\Domain\Shared\Entity\DomainEntity;
+use App\Domain\Shared\AggregateRoot;
 
 class NotSpecification extends Specification
 {
@@ -13,7 +13,7 @@ class NotSpecification extends Specification
         $this->specification = $specification;
     }
 
-    public function isSatisfiedBy(DomainEntity $entity): bool
+    public function isSatisfiedBy(AggregateRoot $entity): bool
     {
         return !$this->specification->isSatisfiedBy($entity);
     }

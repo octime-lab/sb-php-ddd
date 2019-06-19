@@ -2,11 +2,11 @@
 
 namespace App\Domain\Shared\Specification;
 
-use App\Domain\Shared\Entity\DomainEntity;
+use App\Domain\Shared\AggregateRoot;
 
 interface SpecificationInterface
 {
-    public function isSatisfiedBy(DomainEntity $entity): bool;
+    public function isSatisfiedBy(AggregateRoot $entity): bool;
 
     public function andSpecification(SpecificationInterface $specification): SpecificationInterface;
 

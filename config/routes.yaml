@@ -11,8 +11,6 @@ movie_delete:
     path:     api/movie/{id}
     defaults: { _controller: 'App\Application\Controller\MovieController::delete' }
     methods:  DELETE
-    requirements:
-        id: \d+
 
 movie_list:
     path:     api/movies
@@ -23,5 +21,3 @@ movie_read:
     path:     api/movie/{id}
     defaults: { _controller: 'App\Application\Controller\MovieController::read' }
     methods:  GET
-    requirements:
-        id: \d+

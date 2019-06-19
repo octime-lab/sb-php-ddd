@@ -13,6 +13,14 @@ class MovieRepresentation
      *     "movie_list"
      * })
      */
+    private $id;
+
+    /**
+     * @Serializer\Groups({
+     *     "movie_read",
+     *     "movie_list"
+     * })
+     */
     private $exploitationVisa;
 
     /**
@@ -33,6 +41,7 @@ class MovieRepresentation
 
     public function __construct(Movie $dMovie)
     {
+        $this->id = $dMovie->id();
         $this->exploitationVisa = $dMovie->exploitationVisa();
         $this->title = $dMovie->title();
         $this->year = $dMovie->year();

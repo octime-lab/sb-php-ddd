@@ -28,9 +28,9 @@ final class MovieRepositoryPomm implements MovieRepository
         $this->movieModel->insertOne($fMovie);
     }
 
-    public function findByExploitationVisa(string $exploitationVisa): ?Movie
+    public function findById(string $id): ?Movie
     {
-        $fMovie = $this->movieModel->findByExploitationVisa($exploitationVisa)->current();
+        $fMovie = $this->movieModel->findById($id)->current();
 
         if (!$fMovie) {
             return null;
@@ -50,8 +50,8 @@ final class MovieRepositoryPomm implements MovieRepository
         return $movies;
     }
 
-    public function deleteByExploitationVisa(string $exploitationVisa): void
+    public function deleteById(string $id): void
     {
-        $this->movieModel->deleteWhere(new Where('exploitation_visa = $*', [$exploitationVisa]));
+        $this->movieModel->deleteWhere(new Where('id = $*', [$id]));
     }
 }

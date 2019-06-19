@@ -2,7 +2,6 @@
 
 namespace App\Domain\Shared;
 
-use App\Domain\Shared\Entity\DomainEntityInterface;
 use ArrayObject;
 
 abstract class Collection extends ArrayObject
@@ -16,7 +15,7 @@ abstract class Collection extends ArrayObject
         parent::__construct();
     }
 
-    public function exists(DomainEntityInterface $entity): bool
+    public function exists(AggregateRoot $entity): bool
     {
         $this->checkInstance($entity);
 
@@ -29,7 +28,7 @@ abstract class Collection extends ArrayObject
         return false;
     }
 
-    public function add(DomainEntityInterface $entity): void
+    public function add(AggregateRoot $entity): void
     {
         $this->checkInstance($entity);
 
@@ -38,7 +37,7 @@ abstract class Collection extends ArrayObject
         }
     }
 
-    public function remove(DomainEntityInterface $entity): void
+    public function remove(AggregateRoot $entity): void
     {
         $this->checkInstance($entity);
 
@@ -49,7 +48,7 @@ abstract class Collection extends ArrayObject
         }
     }
 
-    private function checkInstance(DomainEntityInterface $entity): void
+    private function checkInstance(AggregateRoot $entity): void
     {
         if (!(is_a($entity, $this->entityClass))) {
             throw new \Exception(

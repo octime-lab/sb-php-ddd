@@ -20,7 +20,7 @@ final class MovieParamConverter implements ParamConverterInterface
 
     public function apply(Request $request, ParamConverter $configuration): bool
     {
-        if (null === $movie = $this->movieRepository->findByExploitationVisa($request->attributes->get('id'))) {
+        if (null === $movie = $this->movieRepository->findById($request->attributes->get('id'))) {
             throw new NotFoundHttpException('movie.not_exits');
         }
 

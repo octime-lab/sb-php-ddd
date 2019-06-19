@@ -6,5 +6,5 @@ use App\Infrastructure\Command\Command;
 
 class MovieDeleteCommand extends Command
 {
-    public $exploitationVisa;
+    public $id;
 }

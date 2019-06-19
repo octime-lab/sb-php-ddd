@@ -17,12 +17,12 @@ class MovieModel extends Model
         $this->flexible_entity_class = Movie::class;
     }
 
-    public function findByExploitationVisa(string $exploitationVisa): CollectionIterator
+    public function findById(string $id): CollectionIterator
     {
         $sql = <<<SQL
             SELECT *
             FROM movie
-            WHERE exploitation_visa = '$exploitationVisa'
+            WHERE id = '$id'
 SQL;
 
         return $this->query($sql);

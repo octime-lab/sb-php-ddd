@@ -2,7 +2,7 @@
 
 namespace App\Domain\Shared\Specification;
 
-use App\Domain\Shared\Entity\DomainEntity;
+use App\Domain\Shared\AggregateRoot;
 
 class OrSpecification extends Specification
 {
@@ -16,7 +16,7 @@ class OrSpecification extends Specification
         $this->specification2 = $specification2;
     }
 
-    public function isSatisfiedBy(DomainEntity $entity): bool
+    public function isSatisfiedBy(AggregateRoot $entity): bool
     {
         return $this->specification1->isSatisfiedBy($entity) || $this->specification2->isSatisfiedBy($entity);
     }

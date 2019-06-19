@@ -2,9 +2,9 @@
 
 namespace App\Domain\BoundedContext\Movie;
 
-use App\Domain\Shared\Entity\DomainEntity;
+use App\Domain\Shared\AggregateRoot;
 
-final class Movie extends DomainEntity
+final class Movie extends AggregateRoot
 {
     private $exploitationVisa;
 

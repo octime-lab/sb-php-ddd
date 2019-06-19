@@ -31,7 +31,11 @@ class Uuid
         return $this->value();
     }
 
+<<<<<<< HEAD
     private function ensureIsValidUuid($id): void
+=======
+    private function ensureIsValidUuid(string $id): void
+>>>>>>> refact shared domain to add uuid
     {
         if (!RamseyUuid::isValid($id)) {
             throw new InvalidArgumentException(

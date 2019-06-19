@@ -17,6 +17,6 @@ final class MovieDeleteCommandHandler implements CommandHandlerInterface
 
     public function handle(Command $command): void
     {
-        $this->movieRepository->deleteByExploitationVisa($command->exploitationVisa);
+        $this->movieRepository->deleteById($command->id);
     }
 }

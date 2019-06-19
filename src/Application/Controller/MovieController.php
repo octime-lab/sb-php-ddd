@@ -77,12 +77,11 @@ class MovieController extends RestController
     /**
      * @SWG\Delete(
      *     @SWG\Parameter(
-     *         description="ID of movie to delete",
-     *         format="int32",
+     *         description="ID of movie to fetch",
      *         in="path",
      *         name="id",
      *         required=true,
-     *         type="integer"
+     *         type="string"
      *     ),
      *     @SWG\Response(
      *         response=204,
@@ -102,7 +101,7 @@ class MovieController extends RestController
     public function delete(Movie $movie): JsonResponse
     {
         $command = new MovieDeleteCommand();
-        $command->exploitationVisa = $movie->exploitationVisa();
+        $command->id = $movie->id();
 
         return new JsonResponse($this->commandBus->handle($command), JsonResponse::HTTP_NO_CONTENT);
     }
@@ -173,11 +172,10 @@ class MovieController extends RestController
      * @SWG\Get(
      *     @SWG\Parameter(
      *         description="ID of movie to fetch",
-     *         format="int32",
      *         in="path",
      *         name="id",
      *         required=true,
-     *         type="integer"
+     *         type="string"
      *     ),
      *     @SWG\Response(
      *         response=200,

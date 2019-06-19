@@ -8,9 +8,9 @@ use App\Domain\BoundedContext\Movie\Movies;
 
 final class MovieInMemory implements MovieRepository
 {
-    public function findByExploitationVisa(string $exploitationVisa): ?Movie
+    public function deleteById(string $id): void
     {
-        // TODO: Implement findByExploitationVisa() method.
+        // TODO: Implement deleteById() method.
     }
 
     public function create(Movie $movie): void
@@ -18,9 +18,9 @@ final class MovieInMemory implements MovieRepository
         // TODO: Implement create() method.
     }
 
-    public function deleteByExploitationVisa(string $exploitationVisa): void
+    public function findById(string $id): ?Movie
     {
-        // TODO: Implement deleteByExploitationVisa() method.
+        // TODO: Implement findById() method.
     }
 
     public function list(int $page, int $limit): Movies

@@ -10,9 +10,9 @@ namespace App\Infrastructure\Model\Db\PublicSchema\AutoStructure;
 use PommProject\ModelManager\Model\RowStructure;
 
 /**
- * User.
+ * Migrations.
  *
- * Structure class for relation public.user.
+ * Structure class for relation public.migrations.
  *
  * Class and fields comments are inspected from table and fields comments.
  * Just add comments in your database and they will appear here.
@@ -20,7 +20,7 @@ use PommProject\ModelManager\Model\RowStructure;
  * @see http://www.postgresql.org/docs/9.0/static/sql-comment.html
  * @see RowStructure
  */
-class User extends RowStructure
+class Migrations extends RowStructure
 {
     /**
      * __construct.
@@ -30,13 +30,13 @@ class User extends RowStructure
     public function __construct()
     {
         $this
-            ->setRelation('public.user')
-            ->setPrimaryKey(['id'])
-            ->addField('id', 'int4')
-            ->addField('username', 'varchar')
-            ->addField('password', 'varchar')
-            ->addField('email', 'varchar')
-            ->addField('is_active', 'bool')
+            ->setRelation('public.migrations')
+            ->setPrimaryKey(['version'])
+            ->addField('version', 'int8')
+            ->addField('migration_name', 'varchar')
+            ->addField('start_time', 'timestamp')
+            ->addField('end_time', 'timestamp')
+            ->addField('breakpoint', 'bool')
             ;
     }
 }
