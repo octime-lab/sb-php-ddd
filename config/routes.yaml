@@ -4,20 +4,20 @@ login_check:
 
 movie_create:
     path:     api/movie/create
-    defaults: { _controller: 'App\Application\Controller\MovieController::create' }
+    defaults: { _controller: 'App\UI\Http\Controller\MovieController::create' }
     methods:  POST
 
 movie_delete:
     path:     api/movie/{id}
-    defaults: { _controller: 'App\Application\Controller\MovieController::delete' }
+    defaults: { _controller: 'App\UI\Http\Controller\MovieController::delete' }
     methods:  DELETE
 
 movie_list:
     path:     api/movies
-    defaults: { _controller: 'App\Application\Controller\MovieController::list' }
+    defaults: { _controller: 'App\UI\Http\Controller\MovieController::list' }
     methods:  GET
 
 movie_read:
     path:     api/movie/{id}
-    defaults: { _controller: 'App\Application\Controller\MovieController::read' }
+    defaults: { _controller: 'App\UI\Http\Controller\MovieController::read' }
     methods:  GET

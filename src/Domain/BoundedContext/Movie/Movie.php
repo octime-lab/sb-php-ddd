@@ -7,9 +7,7 @@ use App\Domain\Shared\AggregateRoot;
 final class Movie extends AggregateRoot
 {
     private $exploitationVisa;
-
     private $title;
-
     private $year;
 
     public function __construct(MovieId $id, MovieExploitationVisa $exploitationVisa, MovieTitle $title, MovieYear $year)

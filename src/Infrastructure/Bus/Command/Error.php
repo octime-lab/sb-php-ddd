@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Command;
+namespace App\Infrastructure\Bus\Command;
 
 use Swagger\Annotations as SWG;
 

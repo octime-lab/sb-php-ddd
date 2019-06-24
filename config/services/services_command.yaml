@@ -1,5 +1,5 @@
 services:
-    App\Infrastructure\Command\CommandBus:
+    App\Infrastructure\Bus\Command\CommandBusAsync:
         arguments:
             - '@service_container'
 

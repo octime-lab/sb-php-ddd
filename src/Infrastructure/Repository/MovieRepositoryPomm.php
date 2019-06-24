@@ -13,7 +13,6 @@ use PommProject\Foundation\Where;
 final class MovieRepositoryPomm implements MovieRepository
 {
     private $movieModel;
-
     private $movieDTO;
 
     public function __construct(MovieModel $movieModel, MovieDTO $movieDTO)

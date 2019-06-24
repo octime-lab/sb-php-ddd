@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Infrastructure\Command;
+namespace App\Infrastructure\Bus\Command;
 
+use App\Domain\Shared\Bus\Command\Command;
+use App\Domain\Shared\Bus\Command\CommandBus;
+use App\Domain\Shared\Bus\Command\CommandHandler;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-final class CommandBus
+final class CommandBusAsync implements CommandBus
 {
     private $container;
 
@@ -13,12 +16,12 @@ final class CommandBus
         $this->container = $container;
     }
 
-    public function handle(Command $command): void
+    public function dispatch(Command $command): void
     {
         $this->getHandler($command)->handle($command);
     }
 
-    private function getHandler(Command $command): CommandHandlerInterface
+    private function getHandler(Command $command): CommandHandler
     {
         $commandClassName = substr(
             get_class($command),

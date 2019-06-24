@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Controller;
+namespace App\UI\Http\Controller;
 
-use App\Infrastructure\Command\CommandBus;
+use App\Infrastructure\Bus\Command\CommandBusAsync as CommandBus;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 

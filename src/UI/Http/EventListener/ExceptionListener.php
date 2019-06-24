@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\EventListener;
+namespace App\UI\Http\EventListener;
 
 use App\Domain\Shared\DomainError;
 use App\Infrastructure\Exception\NotValidFormException;

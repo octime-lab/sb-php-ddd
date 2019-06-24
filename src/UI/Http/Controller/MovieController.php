@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Controller;
+namespace App\UI\Http\Controller;
 
 use App\Application\Command\Movie\MovieCreateCommand;
 use App\Application\Command\Movie\MovieDeleteCommand;
@@ -9,8 +9,8 @@ use App\Infrastructure\Exception\NotValidFormException;
 use App\Infrastructure\Repository\MovieRepositoryPomm;
 use App\Infrastructure\Representation\MovieRepresentation;
 use App\Infrastructure\Utils\Utils;
-use App\Infrastructure\Command\CommandBus;
-use App\Infrastructure\Command\CommandType;
+use App\Infrastructure\Bus\Command\CommandBusAsync as CommandBus;
+use App\Infrastructure\Bus\Command\CommandType;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\CollectionRepresentation;
 use Hateoas\Representation\Factory\PagerfantaFactory;
@@ -54,7 +54,7 @@ class MovieController extends RestController
      *     @SWG\Response(
      *         response="default",
      *         description="Unexpected error",
-     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Command\Error::class))
+     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Bus\Command\Error::class))
      *     ),
      *     summary="Creates a new movie in the dabase. Duplicates are allowed",
      *     tags={"Movie"}
@@ -71,7 +71,7 @@ class MovieController extends RestController
             throw new NotValidFormException($form);
         }
 
-        return new JsonResponse($this->commandBus->handle($command), JsonResponse::HTTP_CREATED);
+        return new JsonResponse($this->commandBus->dispatch($command), JsonResponse::HTTP_CREATED);
     }
 
     /**
@@ -90,7 +90,7 @@ class MovieController extends RestController
      *     @SWG\Response(
      *         response="default",
      *         description="Unexpected error",
-     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Command\Error::class))
+     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Bus\Command\Error::class))
      *     ),
      *     summary="Deletes a single movie based on the ID supplied",
      *     tags={"Movie"}
@@ -103,7 +103,7 @@ class MovieController extends RestController
         $command = new MovieDeleteCommand();
         $command->id = $movie->id();
 
-        return new JsonResponse($this->commandBus->handle($command), JsonResponse::HTTP_NO_CONTENT);
+        return new JsonResponse($this->commandBus->dispatch($command), JsonResponse::HTTP_NO_CONTENT);
     }
 
     /**
@@ -127,7 +127,7 @@ class MovieController extends RestController
      *     @SWG\Response(
      *         response="default",
      *         description="Unexpected error",
-     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Command\Error::class))
+     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Bus\Command\Error::class))
      *     ),
      *     summary="Returns all movies from the system that the user has access to",
      *     tags={"Movie"}
@@ -184,9 +184,9 @@ class MovieController extends RestController
      *     @SWG\Response(
      *         response="default",
      *         description="Unexpected error",
-     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Command\Error::class))
+     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Bus\Command\Error::class))
      *     ),
-     *     summary="Returns a user based on a single ID, if the user does not have access to the movie",
+     *     summary="Returns a movie",
      *     tags={"Movie"}
      * )
      *

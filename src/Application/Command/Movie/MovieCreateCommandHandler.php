@@ -4,10 +4,10 @@ namespace App\Application\Command\Movie;
 
 use App\Domain\BoundedContext\Movie\MovieCreate;
 use App\Domain\BoundedContext\Movie\MovieRepository;
-use App\Infrastructure\Command\Command;
-use App\Infrastructure\Command\CommandHandlerInterface;
+use App\Domain\Shared\Bus\Command\Command;
+use App\Domain\Shared\Bus\Command\CommandHandler;
 
-final class MovieCreateCommandHandler implements CommandHandlerInterface
+final class MovieCreateCommandHandler implements CommandHandler
 {
     private $movieRepository;
 

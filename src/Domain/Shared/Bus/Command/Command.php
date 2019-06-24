@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Command;
+namespace App\Domain\Shared\Bus\Command;
 
 abstract class Command
 {

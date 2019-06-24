@@ -14,12 +14,12 @@ services:
         autowire: true
         autoconfigure: false
 
-    App\Application\Controller\:
-        resource: '../src/Application/Controller'
+    App\UI\Http\Controller\:
+        resource: '../src/UI/Http/Controller'
         tags: ['controller.service_arguments']
 
     ################### LISTENER ###################
-    App\Application\EventListener\ExceptionListener:
+    App\UI\Http\EventListener\ExceptionListener:
         arguments:
             - '@jms_serializer'
             - '@translator.default'

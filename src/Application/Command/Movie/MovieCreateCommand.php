@@ -2,7 +2,7 @@
 
 namespace App\Application\Command\Movie;
 
-use App\Infrastructure\Command\Command;
+use App\Domain\Shared\Bus\Command\Command;
 use Swagger\Annotations as SWG;
 
 /**
