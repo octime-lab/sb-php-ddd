@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\BoundedContext\Movie;
 
 final class MovieFinder
@@ -11,7 +13,7 @@ final class MovieFinder
         $this->repository = $repository;
     }
 
-    public function __invoke(MovieId $id): Movie
+    public function __invoke(MovieId $id): array
     {
         $movie = $this->repository->search($id);
 
@@ -20,9 +22,9 @@ final class MovieFinder
         return $movie;
     }
 
-    private function ensureMovieExists(MovieId $id, Movie $movie = null): void
+    private function ensureMovieExists(MovieId $id, array $movie = []): void
     {
-        if (null === $movie) {
+        if ([] === $movie) {
             throw new MovieNotFound($id);
         }
     }

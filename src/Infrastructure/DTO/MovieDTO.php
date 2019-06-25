@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Infrastructure\DTO;
 
 use App\Domain\BoundedContext\Movie\MovieExploitationVisa;
@@ -11,7 +13,7 @@ use App\Domain\BoundedContext\Movie\Movie as DomainMovie;
 use App\Infrastructure\Model\Db\PublicSchema\Movie as FlexibleMovie;
 use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 
-final class MovieDTO implements DTOInterface
+final class MovieDTO
 {
     public function domainToFlexible(AggregateRoot $dMovie): FlexibleEntityInterface
     {

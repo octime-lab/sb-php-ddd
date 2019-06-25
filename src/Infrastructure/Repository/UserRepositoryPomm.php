@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Infrastructure\Repository;
 
 use App\Infrastructure\Model\Db\PublicSchema\User;

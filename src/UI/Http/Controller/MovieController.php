@@ -1,43 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\UI\Http\Controller;
 
 use App\Application\Command\Movie\MovieCreateCommand;
 use App\Application\Command\Movie\MovieDeleteCommand;
-use App\Domain\BoundedContext\Movie\Movie;
-use App\Infrastructure\Exception\NotValidFormException;
-use App\Infrastructure\Repository\MovieRepositoryPomm;
-use App\Infrastructure\Representation\MovieRepresentation;
-use App\Infrastructure\Utils\Utils;
-use App\Infrastructure\Bus\Command\CommandBusAsync as CommandBus;
-use App\Infrastructure\Bus\Command\CommandType;
-use Hateoas\Configuration\Route;
-use Hateoas\Representation\CollectionRepresentation;
-use Hateoas\Representation\Factory\PagerfantaFactory;
-use JMS\Serializer\SerializationContext;
-use JMS\Serializer\SerializerInterface;
+use App\Application\Query\Movie\MovieFindQuery;
+use App\Infrastructure\Shared\Exception\NotValidFormException;
+use App\Infrastructure\Shared\Utils\Utils;
+use App\Infrastructure\Shared\Bus\Command\CommandType;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Pagerfanta\Adapter\FixedAdapter;
-use Pagerfanta\Pagerfanta;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class MovieController extends RestController
 {
-    private $movieRepository;
-
-    public function __construct(
-        SerializerInterface $serializer,
-        CommandBus $commandBus,
-        MovieRepositoryPomm $movieRepository
-    ) {
-        parent::__construct($serializer, $commandBus);
-
-        $this->movieRepository = $movieRepository;
-    }
-
     /**
      * @SWG\Post(
      *     @SWG\Parameter(
@@ -54,7 +33,7 @@ class MovieController extends RestController
      *     @SWG\Response(
      *         response="default",
      *         description="Unexpected error",
-     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Bus\Command\Error::class))
+     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Shared\Bus\Command\Error::class))
      *     ),
      *     summary="Creates a new movie in the dabase. Duplicates are allowed",
      *     tags={"Movie"}
@@ -71,7 +50,7 @@ class MovieController extends RestController
             throw new NotValidFormException($form);
         }
 
-        return new JsonResponse($this->commandBus->dispatch($command), JsonResponse::HTTP_CREATED);
+        return new JsonResponse($this->dispatch($command), JsonResponse::HTTP_CREATED);
     }
 
     /**
@@ -90,20 +69,18 @@ class MovieController extends RestController
      *     @SWG\Response(
      *         response="default",
      *         description="Unexpected error",
-     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Bus\Command\Error::class))
+     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Shared\Bus\Command\Error::class))
      *     ),
      *     summary="Deletes a single movie based on the ID supplied",
      *     tags={"Movie"}
      * )
-     *
-     * @ParamConverter("movie", converter="movie")
      */
-    public function delete(Movie $movie): JsonResponse
+    public function delete(): JsonResponse
     {
         $command = new MovieDeleteCommand();
-        $command->id = $movie->id();
+        //  $command->id = $movie->id();
 
-        return new JsonResponse($this->commandBus->dispatch($command), JsonResponse::HTTP_NO_CONTENT);
+        return new JsonResponse($this->dispatch($command), JsonResponse::HTTP_NO_CONTENT);
     }
 
     /**
@@ -127,7 +104,7 @@ class MovieController extends RestController
      *     @SWG\Response(
      *         response="default",
      *         description="Unexpected error",
-     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Bus\Command\Error::class))
+     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Shared\Bus\Command\Error::class))
      *     ),
      *     summary="Returns all movies from the system that the user has access to",
      *     tags={"Movie"}
@@ -138,34 +115,7 @@ class MovieController extends RestController
         $page = $request->query->get('page', 1);
         $limit = $request->query->get('limit', 10);
 
-        $movieRepresentations = [];
-
-        foreach ($this->movieRepository->list($page, $limit) as $dMovie) {
-            $movieRepresentations[] = new MovieRepresentation($dMovie);
-        }
-
-        $pager = new Pagerfanta(new FixedAdapter(count($movieRepresentations), $movieRepresentations));
-        $pager->setMaxPerPage($limit);
-
-        $paginatedCollection = (new PagerfantaFactory())->createRepresentation(
-            $pager,
-            new Route($request->get('_route'), array_merge(
-                    $request->get('_route_params'),
-                    $request->query->all())
-            ),
-            new CollectionRepresentation($pager->getCurrentPageResults())
-        );
-
-        return new JsonResponse(
-            $this->serializer->serialize(
-                $paginatedCollection,
-                'json',
-                SerializationContext::create()->setGroups(['Default', 'movie_list'])->setSerializeNull(true)
-            ),
-            JsonResponse::HTTP_OK,
-            [],
-            true
-        );
+        // todo
     }
 
     /**
@@ -184,25 +134,14 @@ class MovieController extends RestController
      *     @SWG\Response(
      *         response="default",
      *         description="Unexpected error",
-     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Bus\Command\Error::class))
+     *         @SWG\Schema(ref=@Model(type=App\Infrastructure\Shared\Bus\Command\Error::class))
      *     ),
      *     summary="Returns a movie",
      *     tags={"Movie"}
      * )
-     *
-     * @ParamConverter("movie", converter="movie")
      */
-    public function read(Movie $movie): JsonResponse
+    public function read(string $id): JsonResponse
     {
-        return new JsonResponse(
-            $this->serializer->serialize(
-                new MovieRepresentation($movie),
-                'json',
-                SerializationContext::create()->setGroups(['movie_read'])->setSerializeNull(true)
-            ),
-            JsonResponse::HTTP_OK,
-            [],
-            true
-        );
+        return $this->jsonResponse($this->ask(new MovieFindQuery($id)));
     }
 }

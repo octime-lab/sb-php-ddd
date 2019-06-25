@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Infrastructure\Repository;
 
 use App\Domain\BoundedContext\Movie\MovieId;
 use App\Domain\BoundedContext\Movie\MovieRepository;
-use App\Domain\BoundedContext\Movie\Movies;
 use App\Domain\BoundedContext\Movie\Movie;
 use App\Infrastructure\DTO\MovieDTO;
 use App\Infrastructure\Model\Db\PublicSchema\MovieModel;
@@ -28,26 +29,19 @@ final class MovieRepositoryPomm implements MovieRepository
         $this->movieModel->insertOne($fMovie);
     }
 
-    public function search(MovieId $id): ?Movie
+    public function search(MovieId $id): array
     {
         $fMovie = $this->movieModel->findById($id->value())->current();
 
         if (!$fMovie) {
-            return null;
+            return [];
         }
 
-        return $this->movieDTO->flexibleToDomain($fMovie);
+        return $fMovie->extract();
     }
 
-    public function list(int $page, int $limit): Movies
+    public function list(int $page, int $limit): array
     {
-        $movies = new Movies();
-
-        foreach ($this->movieModel->list($page, $limit) as $fTask) {
-            $movies->append($this->movieDTO->flexibleToDomain($fTask));
-        }
-
-        return $movies;
     }
 
     public function delete(MovieId $id): void

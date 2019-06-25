@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Infrastructure\Utils;
+declare(strict_types=1);
+
+namespace App\Infrastructure\Shared\Utils;
 
 class Utils
 {

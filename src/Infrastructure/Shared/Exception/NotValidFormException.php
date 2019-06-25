@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Infrastructure\Exception;
+declare(strict_types=1);
+
+namespace App\Infrastructure\Shared\Exception;
 
 use Symfony\Component\Form\FormInterface;
 

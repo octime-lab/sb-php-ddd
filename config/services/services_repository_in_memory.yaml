@@ -1,2 +1,2 @@
 services:
-    App\Infrastructure\InMemory\MovieInMemory:
+    App\Infrastructure\Repository\InMemory\MovieInMemory:

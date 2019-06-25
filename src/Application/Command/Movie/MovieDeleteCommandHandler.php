@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Command\Movie;
 
 use App\Domain\BoundedContext\Movie\MovieId;
@@ -9,15 +11,15 @@ use App\Domain\Shared\Bus\Command\CommandHandler;
 
 final class MovieDeleteCommandHandler implements CommandHandler
 {
-    private $movieRepository;
+    private $repository;
 
     public function __construct(MovieRepository $movieRepository)
     {
-        $this->movieRepository = $movieRepository;
+        $this->repository = $movieRepository;
     }
 
     public function handle(Command $command): void
     {
-        $this->movieRepository->delete(new MovieId($command->id));
+        $this->repository->delete(new MovieId($command->id));
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Infrastructure\Serializer;
+declare(strict_types=1);
+
+namespace App\Infrastructure\Shared\Serializer;
 
 use Symfony\Component\Form\Form;
 

@@ -1,8 +1,8 @@
 imports:
     - { resource: "services/services_command.yaml" }
+    - { resource: "services/services_query.yaml" }
     - { resource: "services/services_dto.yaml" }
     - { resource: "services/services_model.yaml" }
-    - { resource: "services/services_param_converter.yaml" }
     - { resource: "services/services_repository.yaml" }
     - { resource: "services/services_repository_in_memory.yaml" }
 
@@ -23,7 +23,7 @@ services:
         arguments:
             - '@jms_serializer'
             - '@translator.default'
-            - '@App\Infrastructure\Serializer\FormErrorsSerializer'
+            - '@App\Infrastructure\Shared\Serializer\FormErrorsSerializer'
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
@@ -33,4 +33,7 @@ services:
             - '@App\Infrastructure\Repository\UserRepositoryPomm'
 
     ################### SERIALIZER ###################
-    App\Infrastructure\Serializer\FormErrorsSerializer:
+    App\Infrastructure\Shared\Serializer\FormErrorsSerializer:
+
+    ################### FORMATTER ###################
+    App\UI\Http\Response\JsonApiFormatter:

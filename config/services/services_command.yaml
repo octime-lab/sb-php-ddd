@@ -1,5 +1,5 @@
 services:
-    App\Infrastructure\Bus\Command\CommandBusAsync:
+    App\Infrastructure\Shared\Bus\Command\CommandBusSymfonySync:
         arguments:
             - '@service_container'
 

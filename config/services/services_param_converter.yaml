@@ -1,6 +1,0 @@
-services:
-    App\Infrastructure\ParamConverter\MovieParamConverter:
-        arguments:
-            - '@App\Infrastructure\Repository\MovieRepositoryPomm'
-        tags:
-            - { name: request.param_converter, converter: movie }

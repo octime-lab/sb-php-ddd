@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Shared\Bus\Query;
+declare(strict_types=1);
 
-use Symfony\Component\HttpFoundation\JsonResponse;
+namespace App\Domain\Shared\Bus\Query;
 
 interface QueryBus
 {
-    public function ask(Query $query): JsonResponse;
+    public function ask(Query $query): Response;
 }

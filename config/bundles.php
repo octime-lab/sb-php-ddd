@@ -13,5 +13,4 @@ return [
     PommProject\PommBundle\PommBundle::class => ['all' => true],
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
-    League\Tactician\Bundle\TacticianBundle::class => ['all' => true],
 ];

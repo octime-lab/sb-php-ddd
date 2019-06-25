@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Infrastructure\Bus\Command;
+declare(strict_types=1);
+
+namespace App\Infrastructure\Shared\Bus\Command;
 
 use App\Domain\Shared\Bus\Command\Command;
 use App\Domain\Shared\Bus\Command\CommandBus;
 use App\Domain\Shared\Bus\Command\CommandHandler;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-final class CommandBusAsync implements CommandBus
+final class CommandBusSymfonySync implements CommandBus
 {
     private $container;
 

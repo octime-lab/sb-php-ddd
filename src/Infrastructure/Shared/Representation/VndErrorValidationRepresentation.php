@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Infrastructure\Representation\VndError;
+declare(strict_types=1);
+
+namespace App\Infrastructure\Shared\Representation;
 
 use JMS\Serializer\Annotation as Serializer;
 

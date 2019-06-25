@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Infrastructure\Model\Db\PublicSchema;
 
 use App\Infrastructure\Model\Db\PublicSchema\AutoStructure\Movie as MovieStructure;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Infrastructure\View;
 
 use Broadway\ReadModel\SerializableReadModel;
@@ -25,7 +27,7 @@ class MovieView implements SerializableReadModel
     public static function deserialize(array $data): self
     {
         $instance = new self();
-        $instance->uuid = Uuid::fromString($data['uuid']);
+        $instance->uuid = Uuid::fromString($data['id']);
         $instance->exploitationVisa = new MovieExploitationVisa($data['exploitation_visa']);
         $instance->title = new MovieTitle($data['title']);
         $instance->year = new MovieYear($data['year']);

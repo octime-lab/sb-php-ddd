@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\UI\Http\EventListener;
 
 use App\Domain\Shared\DomainError;
-use App\Infrastructure\Exception\NotValidFormException;
-use App\Infrastructure\Representation\VndError\VndErrorCollectionRepresentation;
-use App\Infrastructure\Representation\VndError\VndErrorValidationRepresentation;
-use App\Infrastructure\Serializer\FormErrorsSerializer;
+use App\Infrastructure\Shared\Exception\NotValidFormException;
+use App\Infrastructure\Shared\Representation\VndErrorCollectionRepresentation;
+use App\Infrastructure\Shared\Representation\VndErrorValidationRepresentation;
+use App\Infrastructure\Shared\Serializer\FormErrorsSerializer;
 use Exception;
 use Hateoas\Representation\VndErrorRepresentation;
 use JMS\Serializer\SerializerInterface;

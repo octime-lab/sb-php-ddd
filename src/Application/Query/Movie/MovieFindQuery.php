@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Query\Movie;
 
-use App\Infrastructure\Command\Query;
+use App\Domain\Shared\Bus\Query\Query;
 
 final class MovieFindQuery implements Query
 {

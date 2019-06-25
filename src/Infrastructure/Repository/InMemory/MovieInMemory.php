@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Infrastructure\InMemory;
+declare(strict_types=1);
+
+namespace App\Infrastructure\Repository\InMemory;
 
 use App\Domain\BoundedContext\Movie\Movie;
 use App\Domain\BoundedContext\Movie\MovieId;
 use App\Domain\BoundedContext\Movie\MovieRepository;
-use App\Domain\BoundedContext\Movie\Movies;
 
 final class MovieInMemory implements MovieRepository
 {
@@ -19,12 +20,12 @@ final class MovieInMemory implements MovieRepository
         // TODO: Implement create() method.
     }
 
-    public function search(MovieId $id): ?Movie
+    public function search(MovieId $id): array
     {
         // TODO: Implement findById() method.
     }
 
-    public function list(int $page, int $limit): Movies
+    public function list(int $page, int $limit): array
     {
         // TODO: Implement list() method.
     }
