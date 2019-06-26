@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class VndErrorCollectionRepresentation
+class ErrorCollectionRepresentation
 {
     /**
      * @var string

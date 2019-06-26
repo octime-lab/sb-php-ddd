@@ -10,6 +10,6 @@ final class MovieCreate
 {
     public static function handle(string $exploitationVisa, string $title, int $year): Movie
     {
-        return new Movie(new MovieId(Uuid::random()), new MovieExploitationVisa($exploitationVisa), new MovieTitle($title), new MovieYear($year));
+        return new Movie(new MovieId(Uuid::random()->value()), new MovieExploitationVisa($exploitationVisa), new MovieTitle($title), new MovieYear($year));
     }
 }

@@ -75,10 +75,10 @@ class MovieController extends RestController
      *     tags={"Movie"}
      * )
      */
-    public function delete(): JsonResponse
+    public function delete(string $id): JsonResponse
     {
         $command = new MovieDeleteCommand();
-        //  $command->id = $movie->id();
+        $command->id = $id;
 
         return new JsonResponse($this->dispatch($command), JsonResponse::HTTP_NO_CONTENT);
     }

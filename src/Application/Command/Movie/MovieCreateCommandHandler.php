@@ -20,6 +20,6 @@ final class MovieCreateCommandHandler implements CommandHandler
 
     public function handle(Command $command): void
     {
-        $this->repository->create(MovieCreate::handle($command->exploitationVisa, $command->title, $command->year));
+        $this->repository->create(MovieCreate::handle($command->exploitationVisa, $command->title, (int) $command->year));
     }
 }

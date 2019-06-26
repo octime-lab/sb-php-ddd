@@ -39,6 +39,9 @@ class MovieView implements SerializableReadModel
     {
         return [
             'uuid' => $this->getId(),
+            'exploitation_visa' => $this->exploitationVisa->value(),
+            'title' => $this->title->value(),
+            'year' => $this->year->value(),
         ];
     }
 

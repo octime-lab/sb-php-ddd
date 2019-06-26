@@ -6,11 +6,11 @@ namespace App\UI\Http\EventListener;
 
 use App\Domain\Shared\DomainError;
 use App\Infrastructure\Shared\Exception\NotValidFormException;
-use App\Infrastructure\Shared\Representation\VndErrorCollectionRepresentation;
-use App\Infrastructure\Shared\Representation\VndErrorValidationRepresentation;
+use App\Infrastructure\Shared\Representation\ErrorCollectionRepresentation;
+use App\Infrastructure\Shared\Representation\ErrorRepresentation;
+use App\Infrastructure\Shared\Representation\ErrorValidationRepresentation;
 use App\Infrastructure\Shared\Serializer\FormErrorsSerializer;
 use Exception;
-use Hateoas\Representation\VndErrorRepresentation;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,7 +60,7 @@ final class ExceptionListener
         $event->setResponse(
             new Response(
                 $this->serializer->serialize(
-                    new VndErrorRepresentation(
+                    new ErrorRepresentation(
                         $this->translator->trans($exception->getMessage(),
                             [],
                             'domain'
@@ -77,7 +77,7 @@ final class ExceptionListener
         $event->setResponse(
             new JsonResponse(
                 $this->serializer->serialize(
-                    new VndErrorRepresentation(
+                    new ErrorRepresentation(
                         $this->translator->trans($exception->getMessage(),
                     [],
                     'domain'
@@ -94,7 +94,7 @@ final class ExceptionListener
         $event->setResponse(
             new JsonResponse(
                 $this->serializer->serialize(
-                    new VndErrorRepresentation(
+                    new ErrorRepresentation(
                         $this->translator->trans($exception->errorCode(),
                     [],
                     'domain'
@@ -121,7 +121,7 @@ final class ExceptionListener
                 $message = $this->translator->trans($error, [], 'domain');
             }
 
-            $errorValidationRepresentations[] = new VndErrorValidationRepresentation($message, null);
+            $errorValidationRepresentations[] = new ErrorValidationRepresentation($message, null);
         }
 
         foreach ($formErrors['fields'] as $field => $error) {
@@ -131,10 +131,10 @@ final class ExceptionListener
                 $message = $this->translator->trans($error, [], 'domain');
             }
 
-            $errorValidationRepresentations[] = new VndErrorValidationRepresentation($message, $field);
+            $errorValidationRepresentations[] = new ErrorValidationRepresentation($message, $field);
         }
 
-        $errorCollectionRepresentation = new VndErrorCollectionRepresentation(
+        $errorCollectionRepresentation = new ErrorCollectionRepresentation(
             $this->translator->trans('Validation failed', [], 'domain'),
             $errorValidationRepresentations
         );

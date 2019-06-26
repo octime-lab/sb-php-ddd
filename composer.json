@@ -8,18 +8,16 @@
         "league/tactician-bundle": "^1.1",
         "lexik/jwt-authentication-bundle": "^2.6",
         "nelmio/api-doc-bundle": "^3.4",
-        "nelmio/cors-bundle": "^1.5",
         "pomm-project/pomm-bundle": "^2.4",
         "ramsey/uuid": "^3.8",
         "sensio/framework-extra-bundle": "^5.3",
         "symfony/console": "4.3.*",
         "symfony/form": "4.3.*",
         "symfony/framework-bundle": "4.3.*",
+        "symfony/translation": "4.3.*",
         "symfony/twig-bundle": "4.3.*",
         "symfony/validator": "4.3.*",
-        "symfony/yaml": "4.3.*",
-        "white-october/pagerfanta-bundle": "^1.2",
-        "willdurand/hateoas-bundle": "^2.0"
+        "symfony/yaml": "4.3.*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "3.0.x-dev",
