@@ -7,3 +7,8 @@ services:
         public: true
         arguments:
             - '@App\Infrastructure\Repository\MovieRepositoryPomm'
+
+    App\Application\Query\Movie\MovieListQueryHandler:
+        public: true
+        arguments:
+            - '@App\Infrastructure\Repository\MovieRepositoryPomm'

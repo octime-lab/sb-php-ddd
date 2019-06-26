@@ -42,6 +42,7 @@ final class MovieRepositoryPomm implements MovieRepository
 
     public function list(int $page, int $limit): array
     {
+        return $this->movieModel->list($page, $limit)->extract();
     }
 
     public function delete(MovieId $id): void

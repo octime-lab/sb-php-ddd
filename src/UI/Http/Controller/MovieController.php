@@ -7,6 +7,7 @@ namespace App\UI\Http\Controller;
 use App\Application\Command\Movie\MovieCreateCommand;
 use App\Application\Command\Movie\MovieDeleteCommand;
 use App\Application\Query\Movie\MovieFindQuery;
+use App\Application\Query\Movie\MovieListQuery;
 use App\Infrastructure\Shared\Exception\NotValidFormException;
 use App\Infrastructure\Shared\Utils\Utils;
 use App\Infrastructure\Shared\Bus\Command\CommandType;
@@ -77,23 +78,20 @@ class MovieController extends RestController
      */
     public function delete(string $id): JsonResponse
     {
-        $command = new MovieDeleteCommand();
-        $command->id = $id;
-
-        return new JsonResponse($this->dispatch($command), JsonResponse::HTTP_NO_CONTENT);
+        return new JsonResponse($this->dispatch(new MovieDeleteCommand($id)), JsonResponse::HTTP_NO_CONTENT);
     }
 
     /**
      * @SWG\Get(
      *     @SWG\Parameter(
      *         name="page",
-     *         in="query",
+     *         in="path",
      *         type="integer",
      *         description="The page number"
      *     ),
      *     @SWG\Parameter(
      *         name="limit",
-     *         in="query",
+     *         in="path",
      *         type="integer",
      *         description="Maximum number of results to return"
      *     ),
@@ -112,10 +110,7 @@ class MovieController extends RestController
      */
     public function list(Request $request): JsonResponse
     {
-        $page = $request->query->get('page', 1);
-        $limit = $request->query->get('limit', 10);
-
-        // todo
+        return $this->jsonCollection($this->ask(new MovieListQuery($request->get('page', 1), $request->get('limit', 10))), true);
     }
 
     /**
@@ -142,6 +137,6 @@ class MovieController extends RestController
      */
     public function read(string $id): JsonResponse
     {
-        return $this->jsonResponse($this->ask(new MovieFindQuery($id)));
+        return $this->jsonItem($this->ask(new MovieFindQuery($id)));
     }
 }
