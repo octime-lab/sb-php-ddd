@@ -57,7 +57,8 @@ abstract class Collection extends ArrayObject
                 'EntityCollection instance error : '
                 .get_class($entity).
                 ' VS '.
-                $this->entityClass);
+                $this->entityClass
+            );
         }
     }
 }

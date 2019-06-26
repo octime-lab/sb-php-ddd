@@ -61,11 +61,14 @@ final class ExceptionListener
             new Response(
                 $this->serializer->serialize(
                     new ErrorRepresentation(
-                        $this->translator->trans($exception->getMessage(),
+                        $this->translator->trans(
+                            $exception->getMessage(),
                             [],
                             'domain'
                         )
-                    ), 'json'),
+                    ),
+                    'json'
+                ),
                 Response::HTTP_INTERNAL_SERVER_ERROR,
                 ['Content-Type' => 'application/json']
             )
@@ -78,10 +81,14 @@ final class ExceptionListener
             new JsonResponse(
                 $this->serializer->serialize(
                     new ErrorRepresentation(
-                        $this->translator->trans($exception->getMessage(),
-                    [],
-                    'domain'
-                )), 'json'),
+                        $this->translator->trans(
+                            $exception->getMessage(),
+                            [],
+                            'domain'
+                )
+                    ),
+                    'json'
+                ),
                 $exception->getStatusCode(),
                 [],
                 true
@@ -95,10 +102,14 @@ final class ExceptionListener
             new JsonResponse(
                 $this->serializer->serialize(
                     new ErrorRepresentation(
-                        $this->translator->trans($exception->errorCode(),
-                    [],
-                    'domain'
-                )), 'json'),
+                        $this->translator->trans(
+                            $exception->errorCode(),
+                            [],
+                            'domain'
+                )
+                    ),
+                    'json'
+                ),
                 $exception->getCode(),
                 [],
                 true

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Query;
 
 use App\Domain\Shared\Bus\Query\Response;
-use Broadway\ReadModel\SerializableReadModel;
+use App\Infrastructure\Shared\ReadModel\SerializableReadModel;
 
 final class Item implements Response
 {

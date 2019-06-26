@@ -25,8 +25,11 @@ final class FormErrorsSerializer
         $errors['fields'] = $this->serialize($form);
 
         if ($flatArray) {
-            $errors['fields'] = $this->arrayFlatten($errors['fields'],
-                $glueKeys, (($addFormName) ? $form->getName() : ''));
+            $errors['fields'] = $this->arrayFlatten(
+                $errors['fields'],
+                $glueKeys,
+                (($addFormName) ? $form->getName() : '')
+            );
         }
 
         return $errors;
@@ -55,9 +58,13 @@ final class FormErrorsSerializer
 
         foreach ($array as $key => $value) {
             if (is_array($value)) {
-                $flattenedArray = array_merge($flattenedArray,
-                    $this->arrayFlatten($value, $separator,
-                        (strlen($flattenedKey) > 0 ? $flattenedKey.$separator : '').$key)
+                $flattenedArray = array_merge(
+                    $flattenedArray,
+                    $this->arrayFlatten(
+                        $value,
+                        $separator,
+                        (strlen($flattenedKey) > 0 ? $flattenedKey.$separator : '').$key
+                    )
                 );
             } else {
                 $flattenedArray[(strlen($flattenedKey) > 0 ? $flattenedKey.$separator : '').$key] = $value;

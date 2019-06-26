@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\View;
 
-use Broadway\ReadModel\SerializableReadModel;
-use Broadway\Serializer\Serializable;
+use App\Infrastructure\Shared\ReadModel\Serializable;
+use App\Infrastructure\Shared\ReadModel\SerializableReadModel;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use App\Domain\BoundedContext\Movie\MovieExploitationVisa;
