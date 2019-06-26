@@ -26,10 +26,6 @@ final class MovieCreateCommandHandler implements CommandHandler
 
     public function handle(Command $command): void
     {
-        $exploitationVisa = (string) $command->exploitationVisa;
-        $title = (string) $command->title;
-        $year = (int) $command->year;
-
         $submittedData = Utils::camelizeArray(json_decode($command->json, true));
 
         $form = $this->formFactory->create(CommandType::class, $command, ['data_class' => get_class($command)]);
@@ -39,7 +35,12 @@ final class MovieCreateCommandHandler implements CommandHandler
             throw new NotValidFormException($form);
         }
 
+        $exploitationVisa = (string) $command->exploitationVisa;
+        $title = (string) $command->title;
+        $year = (int) $command->year;
+
         $movie = MovieCreate::handle($exploitationVisa, $title, $year);
+
         $this->repository->create($movie);
     }
 }
