@@ -8,9 +8,6 @@ use App\Application\Command\Movie\MovieCreateCommand;
 use App\Application\Command\Movie\MovieDeleteCommand;
 use App\Application\Query\Movie\MovieFindQuery;
 use App\Application\Query\Movie\MovieListQuery;
-use App\Infrastructure\Shared\Exception\NotValidFormException;
-use App\Infrastructure\Shared\Utils\Utils;
-use App\Infrastructure\Shared\Bus\Command\CommandType;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -43,13 +40,7 @@ class MovieController extends RestController
     public function create(Request $request): JsonResponse
     {
         $command = new MovieCreateCommand();
-
-        $form = $this->createForm(CommandType::class, $command, ['data_class' => MovieCreateCommand::class]);
-        $form->submit(Utils::camelizeArray(json_decode($request->getContent(), true)));
-
-        if (!$form->isValid()) {
-            throw new NotValidFormException($form);
-        }
+        $command->json = $request->getContent();
 
         return new JsonResponse($this->dispatch($command), JsonResponse::HTTP_CREATED);
     }

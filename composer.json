@@ -3,6 +3,7 @@
     "license": "proprietary",
     "require": {
         "php": "^7.3",
+        "ext-json": "*",
         "jms/serializer-bundle": "^3.3",
         "lexik/jwt-authentication-bundle": "^2.6",
         "nelmio/api-doc-bundle": "^3.4",

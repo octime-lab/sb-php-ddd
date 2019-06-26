@@ -7,6 +7,7 @@ services:
         public: true
         arguments:
             - '@App\Infrastructure\Repository\MovieRepositoryPomm'
+            - '@form.factory'
 
     App\Application\Command\Movie\MovieDeleteCommandHandler:
         public: true

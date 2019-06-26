@@ -1,5 +1,3 @@
-include Make.config
-
 install: composer cc migrate-up assets generate-models
 
 composer:
@@ -35,9 +33,6 @@ migrate-up:
 
 migrate-down:
 	vendor/bin/phinx rollback
-
-model:
-	bin/console pomm:generate:relation-all -d src/Infrastructure -a 'Model' db $(table)
 
 generate-models:
 	php bin/console pomm:generate:schema-all db public -d ./src/Infrastructure/Model -a App\Infrastructure\Model --psr4
