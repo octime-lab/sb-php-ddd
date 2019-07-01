@@ -1,6 +1,6 @@
-login_check:
-    path: login_check
-    methods: 'POST'
+api_login_check:
+    path: /api/login_check
+    methods:  POST
 
 movie_create:
     path:     api/movie/create
