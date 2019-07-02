@@ -1,22 +1,39 @@
+imports:
+    - { resource: "services/services_command.yaml" }
+    - { resource: "services/services_query.yaml" }
+    - { resource: "services/services_dto.yaml" }
+    - { resource: "services/services_model.yaml" }
+    - { resource: "services/services_repository.yaml" }
+    - { resource: "services/services_repository_in_memory.yaml" }
+
 parameters:
-    locale: 'en'
+    locale: 'fr'
 
 services:
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true
+        autoconfigure: false
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-#    App\:
-#        resource: '../src/*'
-#        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+    App\UI\Http\Controller\:
+        resource: '../src/UI/Http/Controller'
+        tags: ['controller.service_arguments']
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
-#    App\Application\Controller\:
-#        resource: '../src/Controller'
-#        tags: ['controller.service_arguments']
+    ################### LISTENER ###################
+    App\UI\Http\EventListener\ExceptionListener:
+        arguments:
+            - '@jms_serializer'
+            - '@translator.default'
+            - '@App\Infrastructure\Shared\Serializer\FormErrorsSerializer'
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    ################### PROVIDER ###################
+    App\Infrastructure\Provider\UserProvider:
+        arguments:
+            - '@App\Infrastructure\Repository\UserRepositoryPomm'
+
+    ################### SERIALIZER ###################
+    App\Infrastructure\Shared\Serializer\FormErrorsSerializer:
+
+    ################### FORMATTER ###################
+    App\UI\Http\Response\JsonApiFormatter:

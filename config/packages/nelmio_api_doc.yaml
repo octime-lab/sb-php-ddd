@@ -1,10 +1,18 @@
 nelmio_api_doc:
     documentation:
-        models: { use_jms: true }
+        models: { use_jms: false }
         info:
-            title: Empleo
-            description: This is an app to manage time of collaborators
+            title: PHP Sandbox DDD
+            description: This is a sandbox to search & development
             version: 1.0.0
+        securityDefinitions:
+            Bearer:
+                type: apiKey
+                description: 'Value: Bearer {jwt}'
+                name: Authorization
+                in: header
+        security:
+            - Bearer: []
     areas:
         path_patterns:
             - ^/api(?!/doc$)

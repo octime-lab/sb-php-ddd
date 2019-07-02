@@ -3,26 +3,29 @@
     "license": "proprietary",
     "require": {
         "php": "^7.3",
-        "jms/serializer-bundle": "^3.3",
-        "lexik/jwt-authentication-bundle": "^2.6",
-        "nelmio/api-doc-bundle": "^3.4",
-        "nelmio/cors-bundle": "^1.5",
-        "symfony/console": "4.2.*",
-        "symfony/form": "4.2.*",
-        "symfony/framework-bundle": "4.2.*",
-        "symfony/twig-bundle": "4.2.*",
-        "symfony/validator": "4.2.*",
-        "symfony/yaml": "4.2.*",
-        "white-october/pagerfanta-bundle": "^1.2",
-        "willdurand/hateoas-bundle": "^2.0"
+        "ext-json": "*",
+        "jms/serializer-bundle": "^3",
+        "lexik/jwt-authentication-bundle": "^2",
+        "nelmio/api-doc-bundle": "^3",
+        "pomm-project/pomm-bundle": "^2",
+        "ramsey/uuid": "^3",
+        "sensio/framework-extra-bundle": "^5",
+        "symfony/form": "4.3.*",
+        "symfony/framework-bundle": "4.3.*",
+        "symfony/translation": "4.3.*",
+        "symfony/twig-bundle": "4.3.*",
+        "symfony/validator": "4.3.*"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.15",
-        "phpunit/phpunit": "^8.1",
-        "symfony/asset": "4.2.*",
-        "symfony/dotenv": "4.2.*",
-        "symfony/flex": "^1.1",
-        "symfony/profiler-pack": "^1.0"
+        "friendsofphp/php-cs-fixer": "3.0.x-dev",
+        "phpunit/phpunit": "^8",
+        "symfony/asset": "4.3.*",
+        "symfony/browser-kit": "4.3.*",
+        "symfony/dotenv": "4.3.*",
+        "symfony/flex": "^1",
+        "symfony/phpunit-bridge": "4.3.*",
+        "symfony/profiler-pack": "^1",
+        "robmorgan/phinx": "^0.10.7"
     },
     "config": {
         "preferred-install": {
@@ -58,7 +61,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.2.*"
+            "require": "4.3.*"
         }
     }
 }

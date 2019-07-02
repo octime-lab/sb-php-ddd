@@ -1,0 +1,15 @@
+services:
+    App\Infrastructure\Shared\Bus\Command\CommandBusSymfonySync:
+        arguments:
+            - '@service_container'
+
+    App\Application\Command\Movie\MovieCreateCommandHandler:
+        public: true
+        arguments:
+            - '@App\Infrastructure\Repository\MovieRepositoryPomm'
+            - '@form.factory'
+
+    App\Application\Command\Movie\MovieDeleteCommandHandler:
+        public: true
+        arguments:
+            - '@App\Infrastructure\Repository\MovieRepositoryPomm'
